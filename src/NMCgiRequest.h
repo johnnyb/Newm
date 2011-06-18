@@ -2,7 +2,8 @@
 #import "NMAbstractRequest.h"
 
 @interface NMCgiRequest : NMAbstractRequest {
-
 }
+
+-(void) loadEnvironmentVariables;
 
 @end
