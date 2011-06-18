@@ -1,3 +1,5 @@
+// Copyright 2011 Jonathan Bartlett
+
 #import <Foundation/Foundation.h>
 #import "Newm.h"
 #import "NMRoute.h"

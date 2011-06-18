@@ -1,3 +1,5 @@
+// Copyright 2011 Jonathan Bartlett
+
 #import "NMRoute.h"
 
 @implementation NMRoute

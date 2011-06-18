@@ -1,3 +1,5 @@
+// Copyright 2011 Jonathan Bartlett
+
 #import "NMNewmApp.h"
 #import "NewmGlobals.h"
 #import "NMRoute.h"

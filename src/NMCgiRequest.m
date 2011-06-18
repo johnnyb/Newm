@@ -1,3 +1,5 @@
+// Copyright 2011 Jonathan Bartlett
+
 #import "Foundation/Foundation.h"
 #import "NMCgiRequest.h"
 #import "stdlib.h"

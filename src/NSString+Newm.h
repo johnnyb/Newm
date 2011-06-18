@@ -1,3 +1,5 @@
+// Copyright 2011 Jonathan Bartlett
+
 #import <Foundation/Foundation.h>
 
 #define H(val) ([(val) xmlEncode])

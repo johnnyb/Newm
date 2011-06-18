@@ -1,3 +1,5 @@
+// Copyright 2011 Jonathan Bartlett
+
 #import "NSString+Newm.h"
 #import "NSDictionary+Newm.h"
 #import "NMAbstractRequest.h"
