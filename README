@@ -4,6 +4,12 @@ To build on OSX, go into the src directory and issue the following command:
 
 gcc -Wall *.m -framework Foundation
 
-run by doing ./a.out
-
 Currently runs as a CGI program, so you can export PATH_INFO and QUERY_STRING to test
+
+To get the test application to run, do:
+
+gcc -Wall *.m -framework Foundation
+export QUERY_STRING='controller=MyTestController&action=myAction'
+./a.out
+
+
