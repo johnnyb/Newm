@@ -41,13 +41,4 @@ NSString *stringForEnv(char *var) {
 	self.params = [NSDictionary dictionaryFromURLEncodedQueryString:queryString];
 }
 
--(void) process {
-	[self loadEnvironmentVariables];
-
-	printf("Content-Type: text/html\n\n");
-	printf("Query string is %s<br />\n", [self.queryString cStringUsingEncoding:NSUTF8StringEncoding]);
-	printf("Parsed string is %s<br />\n", [[self.params description] cStringUsingEncoding:NSUTF8StringEncoding]);
-	printf("Path info is %s<br />\n", [self.pathInfo cStringUsingEncoding:NSUTF8StringEncoding]);
-}
-
 @end

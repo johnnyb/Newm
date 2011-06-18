@@ -20,14 +20,28 @@
 	int i;
 	for(i = 0; i < beforeFilters.count; i++) {
 		NSInvocation *inv = [beforeFilters objectAtIndex:i];
+		printf("Running before filter: %d", i);
 		[inv invoke];
 		//FIXME - check status to see if I need to redirect or stop the call chain or something
 	}
 }
 
+-(void) runAction:(SEL)selector {
+	[self runBeforeFilters];
+	[self performSelector:selector];
+}
+
+-(void) runActionNamed:(NSString *)actionName {
+
+	SEL actionSelector = NSSelectorFromString(actionName);
+
+	[self runAction:actionSelector];
+}
+
 -(void) addBeforeFilterWithSelector:(SEL)filter {
 	NSMethodSignature *ms = [self methodSignatureForSelector:filter];
 	NSInvocation *inv = [NSInvocation invocationWithMethodSignature:ms];
+	[inv setSelector:filter];
 	[inv setTarget:self];
 	[beforeFilters addObject:inv];
 }

@@ -6,11 +6,12 @@
 	NMAbstractRequest *request;
 } 
 
-
 -(void) addBeforeFilterWithSelector:(SEL)filter;
 -(void) addBeforeFilterWithInvocation:(NSInvocation *)inv;
 -(void) reset;
 -(void) runBeforeFilters;
+-(void) runActionNamed:(NSString *)actionName;
+-(void) runAction:(SEL)selector;
 
 // A list of NSInvocation objects to call
 @property (retain) NSMutableArray *beforeFilters;

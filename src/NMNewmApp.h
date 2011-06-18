@@ -9,6 +9,8 @@
 
 +(NMNewmApp *) boot;
 
+-(void) processRequest:(NMAbstractRequest *)req;
+
 @property (retain) NMRouteMap *routeMap;
 
 @end
