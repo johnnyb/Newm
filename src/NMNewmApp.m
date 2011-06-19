@@ -40,6 +40,9 @@
 	controller.response = resp;
 
 	[controller runActionNamed:actionName];	
+
+	[resp sendHeaders];
+	[resp sendContent];
 }
 
 -(id) init {

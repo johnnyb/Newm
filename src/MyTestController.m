@@ -14,9 +14,8 @@
 
 -(void) myAction {
 	//FIXME - need to create a response object to write back through
-	printf("Content-Type: text/html\n\n");
-	printf("Hello there!\n");
-	printf("Path info: %s\n", [request.pathInfo cStringUsingEncoding:NSUTF8StringEncoding]);
+	[response writeContentString:@"Hello there!\n"];
+	[response writeContentString:[NSString stringWithFormat:@"path Info: %@", request.pathInfo]];
 }
 
 -(void) myBeforeFilter {

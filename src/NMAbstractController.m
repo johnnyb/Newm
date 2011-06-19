@@ -24,7 +24,6 @@
 	int i;
 	for(i = 0; i < beforeFilters.count; i++) {
 		NSInvocation *inv = [beforeFilters objectAtIndex:i];
-		printf("Running before filter: %d", i);
 		[inv invoke];
 		//FIXME - check status to see if I need to redirect or stop the call chain or something
 	}

@@ -3,6 +3,16 @@
 #import <Foundation/Foundation.h>
 
 @interface NMAbstractResponse : NSObject {
+	NSMutableDictionary *headers;
+	NSMutableData *content;
 }
+
+-(void) writeContentData:(NSData *)data;
+-(void) writeContentString:(NSString *)str;
+-(void) sendHeaders;
+-(void) sendContent;
+
+@property (retain) NSMutableDictionary *headers;
+@property (retain) NSMutableData *content;
 
 @end
