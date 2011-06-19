@@ -16,6 +16,7 @@
 	//FIXME - need to create a response object to write back through
 	printf("Content-Type: text/html\n\n");
 	printf("Hello there!\n");
+	printf("Path info: %s\n", [request.pathInfo cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 -(void) myBeforeFilter {

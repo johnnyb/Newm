@@ -18,4 +18,8 @@
 -(NSString *) xmlDecode {
 	return self;
 }
+
+-(BOOL) empty {
+	return [self isEqualToString:@""];
+}
 @end

@@ -3,6 +3,7 @@
 #import "NMNewmApp.h"
 #import "NewmGlobals.h"
 #import "NMRoute.h"
+#import "stdio.h"
 
 @implementation NMNewmApp
 
@@ -18,14 +19,18 @@
 -(void) processRequest:(NMAbstractRequest *)req {
 	//use route map to map pathInfo into params, then use params to map to controllers and actions
 	NMRoute *route = [routeMap routeForRequest:req];
+	if(route == nil) {
+		//FIXME - raise an error
+		fprintf(stderr, "NO ROUTE FOUND!\n");
+	}
 	[route applyToRequest:req];
 	NSString *actionName = [req.params objectForKey:@"action"];
 	NSString *controllerName = [req.params objectForKey:@"controller"];
 
 	//FIXME - should I cache the controllers as I make them?
 	//NOTE - if I do cache the controllers, I need to run reset
-	printf("Controller: %s\n", [controllerName cStringUsingEncoding:NSUTF8StringEncoding]);
-	printf("Action: %s\n", [actionName cStringUsingEncoding:NSUTF8StringEncoding]);
+	fprintf(stderr, "Controller: %s\n", [controllerName cStringUsingEncoding:NSUTF8StringEncoding]);
+	fprintf(stderr, "Action: %s\n", [actionName cStringUsingEncoding:NSUTF8StringEncoding]);
 	
 	Class controller_class = objc_getClass([controllerName cStringUsingEncoding:NSUTF8StringEncoding]);
 	NMAbstractController *controller = [[[controller_class alloc] init] autorelease];

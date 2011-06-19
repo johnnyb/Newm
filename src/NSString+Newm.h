@@ -9,4 +9,5 @@
 -(NSString *) URLDecode;
 -(NSString *) xmlEncode;
 -(NSString *) xmlDecode;
+-(BOOL) empty;
 @end

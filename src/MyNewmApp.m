@@ -9,7 +9,7 @@ NSString *newmAppClassName = @"MyNewmApp";
 
 -(id) init {
 	self = [super init];
-	[routeMap addRoute:[NMRoute routeWithPath:@"whataver" params:[NSDictionary dictionaryWithObjectsAndKeys:@"MyTestController", @"controller", @"myAction", @"action", nil]]];
+	[routeMap addRoute:[NMRoute routeWithPath:@"aaa" params:[NSDictionary dictionaryWithObjectsAndKeys:@"MyTestController", @"controller", @"myAction", @"action", nil]]];
 	return self;
 }
 

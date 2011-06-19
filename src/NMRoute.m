@@ -2,6 +2,7 @@
 
 #import "NMRoute.h"
 #import "NSDictionary+Newm.h"
+#import "NSArray+Newm.h"
 
 @implementation NMRoute
 
@@ -17,7 +18,7 @@
 	self = [super init];
 
 	self.path = rpath;
-	self.pathComponents = [path componentsSeparatedByString:@"/"];
+	self.pathComponents = [[path componentsSeparatedByString:@"/"] arrayByTrimming];
 	self.extraParams = p;
 
 	return self;
@@ -42,7 +43,8 @@
 -(BOOL) matchesRequest:(NMAbstractRequest *)req {
 	int i;
 
-	NSArray *reqPathComps = [req.pathInfo componentsSeparatedByString:@"/"];
+	NSArray *reqPathComps = [[req.pathInfo componentsSeparatedByString:@"/"] arrayByTrimming];
+
 	if(pathComponents.count != reqPathComps.count) {
 		return NO;
 	}
