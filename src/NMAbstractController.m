@@ -6,6 +6,7 @@
 
 @synthesize beforeFilters;
 @synthesize request;
+@synthesize response;
 
 -(id) init {
 	self = [super init];
@@ -16,6 +17,7 @@
 
 -(void) reset {
 	self.request = nil;
+	self.response = nil;
 }
 
 -(void) runBeforeFilters {
@@ -59,6 +61,7 @@
 -(void) dealloc {
 	[beforeFilters release];
 	[request release];
+	[response release];
 
 	[super dealloc];
 }

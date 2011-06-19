@@ -2,10 +2,12 @@
 
 #import <Foundation/Foundation.h>
 #import "NMAbstractRequest.h"
+#import "NMAbstractResponse.h"
 
 @interface NMAbstractController : NSObject {
 	NSMutableArray *beforeFilters;
 	NMAbstractRequest *request;
+	NMAbstractResponse *response;
 } 
 
 -(void) addBeforeFilterWithSelector:(SEL)filter;
@@ -20,5 +22,6 @@
 
 // This is the request used for calls
 @property (retain) NMAbstractRequest *request;
+@property (retain) NMAbstractResponse *response;
 
 @end

@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 #import "NMRouteMap.h"
+#import "NMAbstractRequest.h"
+#import "NMAbstractResponse.h"
 
 @class NMNewmApp;
 
@@ -11,7 +13,7 @@
 
 +(NMNewmApp *) boot;
 
--(void) processRequest:(NMAbstractRequest *)req;
+-(void) processRequest:(NMAbstractRequest *)req usingResponse:(NMAbstractResponse *)resp;
 
 @property (retain) NMRouteMap *routeMap;
 

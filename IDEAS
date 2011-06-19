@@ -1,0 +1,3 @@
+* Need to separate out NMAbstractRequest into a protocol and an object
+
+

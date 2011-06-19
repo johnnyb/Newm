@@ -16,7 +16,7 @@
 	return app;
 }
 
--(void) processRequest:(NMAbstractRequest *)req {
+-(void) processRequest:(NMAbstractRequest *)req usingResponse:(NMAbstractResponse *)resp {
 	//use route map to map pathInfo into params, then use params to map to controllers and actions
 	NMRoute *route = [routeMap routeForRequest:req];
 	if(route == nil) {
@@ -37,6 +37,7 @@
 
 	// Initialize the controller
 	controller.request = req;
+	controller.response = resp;
 
 	[controller runActionNamed:actionName];	
 }
