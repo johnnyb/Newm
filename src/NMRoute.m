@@ -26,7 +26,7 @@
 
 -(void) applyToRequest:(NMAbstractRequest *)req {
 	[req.params addEntriesFromDictionary:extraParams];
-	NSArray *reqPathComps = [req.pathInfo componentsSeparatedByString:@"/"];
+	NSArray *reqPathComps = [[req.pathInfo componentsSeparatedByString:@"/"] arrayByTrimming];
 	int i;
 	for(i = 0; i < pathComponents.count; i++) {
 		NSString *pcomp = [pathComponents objectAtIndex:i];

@@ -18,6 +18,10 @@
 	[response writeContentString:[NSString stringWithFormat:@"path Info: %@", request.pathInfo]];
 }
 
+-(void) myAction2 {
+	[response writeContentString:@"My Action 2"];
+}
+
 -(void) myBeforeFilter {
 	//printf("Runnign Before filter\n");
 }
