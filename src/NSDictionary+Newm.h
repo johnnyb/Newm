@@ -4,4 +4,5 @@
 
 @interface NSDictionary(Newm)
 +(NSMutableDictionary *) dictionaryFromURLEncodedQueryString:(NSString *)str;
+-(NSString *) URLQueryString;
 @end

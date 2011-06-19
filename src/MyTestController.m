@@ -14,11 +14,12 @@
 
 -(void) myAction {
 	//FIXME - need to create a response object to write back through
+	printf("Content-Type: text/html\n\n");
 	printf("Hello there!\n");
 }
 
 -(void) myBeforeFilter {
-	printf("Runnign Before filter\n");
+	//printf("Runnign Before filter\n");
 }
 
 

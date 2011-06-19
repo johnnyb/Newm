@@ -25,4 +25,13 @@
 	return dict;
 }
 
+-(NSString *) URLQueryString {
+	NSMutableArray *params = [NSMutableArray arrayWithCapacity:self.count];
+	for(id key in [self allKeys]) {
+		id val = [self objectForKey:key];
+		[params addObject:[NSString stringWithFormat:@"%@=%@", [key URLEncode], [val URLEncode]]];
+	}
+	return [params componentsJoinedByString:@"&"];
+}
+
 @end

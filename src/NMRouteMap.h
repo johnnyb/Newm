@@ -2,22 +2,22 @@
 
 #import <Foundation/Foundation.h>
 #import "Newm.h"
-#import "NMRoute.h"
+#import "NMAbstractRoute.h"
 
 @interface NMRouteMap : NSObject {
 	NSMutableArray *routeDefinitions;
 	NSMutableDictionary *routesByName;
-	NMRoute *defaultRoute;
+	id<NMAbstractRoute> defaultRoute;
 }
 
--(NMRoute *)routeForRequest:(NMAbstractRequest *)req;
--(void) addRoute:(NMRoute *)route;
--(void) addRoute:(NMRoute *)route named:(NSString *)nm;
--(void) setDefaultRoute:(NMRoute *)route;
--(NMRoute *)routeNamed:(NSString *)nm;
+-(id<NMAbstractRoute>)routeForRequest:(NMAbstractRequest *)req;
+-(void) addRoute:(id<NMAbstractRoute>)route;
+-(void) addRoute:(id<NMAbstractRoute>)route named:(NSString *)nm;
+-(void) setDefaultRoute:(id<NMAbstractRoute>)route;
+-(id<NMAbstractRoute>)routeNamed:(NSString *)nm;
 
 @property (retain) NSMutableArray *routeDefinitions;
-@property (retain) NMRoute *defaultRoute;
+@property (retain) id<NMAbstractRoute> defaultRoute;
 @property (retain) NSMutableDictionary *routesByName;
 
 @end

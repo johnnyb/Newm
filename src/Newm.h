@@ -4,6 +4,7 @@
 #import "NSDictionary+Newm.h"
 #import "NMAbstractRequest.h"
 #import "NMAbstractController.h"
+#import "NMRoute.h"
 #import "NewmGlobals.h"
 
 #define INITFUNC void __attribute__ ((constructor))

@@ -1,26 +1,114 @@
 // Copyright 2011 Jonathan Bartlett
 
 #import "NMRoute.h"
+#import "NSDictionary+Newm.h"
 
 @implementation NMRoute
 
+@synthesize path;
+@synthesize extraParams;
+@synthesize pathComponents;
+
 +(NMRoute *)routeWithPath:(NSString *)rpath params:(NSDictionary *)p {
-	return [[[NMRoute alloc] init] autorelease];
+	return [[[NMRoute alloc] initWithPath:rpath params:p] autorelease];
 }
 
--(id) init {
-	[super init];
+-(id) initWithPath:(NSString *)rpath params:(NSDictionary *)p {
+	self = [super init];
+
+	self.path = rpath;
+	self.pathComponents = [path componentsSeparatedByString:@"/"];
+	self.extraParams = p;
+
 	return self;
 }
 
+-(void) applyToRequest:(NMAbstractRequest *)req {
+	[req.params addEntriesFromDictionary:extraParams];
+	NSArray *reqPathComps = [req.pathInfo componentsSeparatedByString:@"/"];
+	int i;
+	for(i = 0; i < pathComponents.count; i++) {
+		NSString *pcomp = [pathComponents objectAtIndex:i];
+		if([pcomp characterAtIndex:0] == ':') {
+			NSString *newkey = [pcomp substringFromIndex:1];
+			NSString *newval = [reqPathComps objectAtIndex:i];
+			if(newval != nil) {
+				[req.params setObject:newval forKey:newkey];
+			}
+		}
+	}
+}
+
 -(BOOL) matchesRequest:(NMAbstractRequest *)req {
-	//FIXME - use pathInfo to check to see if this request is appropriate
+	int i;
+
+	NSArray *reqPathComps = [req.pathInfo componentsSeparatedByString:@"/"];
+	if(pathComponents.count != reqPathComps.count) {
+		return NO;
+	}
+	for(i = 0; i < pathComponents.count; i++) {
+		NSString *pcomp = [pathComponents objectAtIndex:i];
+		if([pcomp characterAtIndex:0] != ':') {
+			NSString *rpcomp = [reqPathComps objectAtIndex:i];
+			if(![rpcomp isEqualToString:pcomp]) {
+				return NO;
+			}
+		}
+	}
 
 	return YES;
 }
 
--(void) applyToRequest:(NMAbstractRequest *)req {
-	//FIXME - modify req.params according to what is in our route
+-(NSString *) pathFromParams:(NSDictionary *)p {
+	NSMutableArray *newPathComponents = [NSMutableArray arrayWithCapacity:(pathComponents.count + 2)];
+	NSMutableDictionary *pathDict = [p mutableCopy];
+
+	for(NSString *key in [extraParams allKeys]) {
+		NSString *val = [extraParams objectForKey:key];
+		NSString *pdVal = [pathDict objectForKey:key];
+		if(![pdVal isEqual:val]) {
+			return nil;
+		} else {
+			[pathDict removeObjectForKey:key];
+		}
+	}
+
+	int i;	
+	for(i = 0; i < pathComponents.count; i++) {
+		NSString *pcomp = [pathComponents objectAtIndex:i];
+		if([pcomp characterAtIndex:0] != ':') {
+			NSString *key = [pcomp substringFromIndex:1];
+			NSString *val = [pathDict objectForKey:key];
+			if(val == nil) {
+				//Can't generate a path for this route
+				return nil;
+			} else {
+				[pathDict removeObjectForKey:key];
+				[newPathComponents addObject:val];
+			}
+		} else {
+			[newPathComponents addObject:pcomp];
+		}
+	}
+
+	NSString *newPathString = [@"/" stringByAppendingString:[newPathComponents componentsJoinedByString:@"/"]];
+
+	if(pathDict.count > 0) {
+		newPathString = [newPathString stringByAppendingString:@"?"];
+		NSString *queryString = [pathDict URLQueryString];
+		newPathString = [newPathString stringByAppendingString:queryString];
+	}
+
+	return newPathString;
+}
+
+
+-(void) dealloc {
+	[path release];
+	[extraParams release];
+	[pathComponents release];
+
+	[super dealloc];
 }
 
 @end
