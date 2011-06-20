@@ -1,4 +1,6 @@
-all: static
+all: newmlib
+
+newmlib: static
 
 objectfiles:
 	gcc -I ../include/ *.m -c

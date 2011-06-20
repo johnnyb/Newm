@@ -4,8 +4,8 @@
 all: views
 	gcc -I . -Wall generated/*.m *.m -I include -L build -framework Foundation -lnewm -ObjC
 
-newm: 
-	cd Newm; $(MAKE)
+newmlib:
+	cd Newm; $(MAKE) 
 
 views:
 	find view layout -type f -name '*.nmv'|xargs -n 1 ./buildview
