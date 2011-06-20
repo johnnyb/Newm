@@ -1,5 +1,8 @@
+### NOTE - see http://developer.apple.com/library/mac/#qa/qa1490/_index.html
+# -ObjC and -all_load
+
 all: views
-	gcc -Wall *.m -framework Foundation
+	gcc -I . -Wall generated/*.m *.m -I include -L build -framework Foundation -lnewm -ObjC
 
 newm: 
 	cd Newm; $(MAKE)
