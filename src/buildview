@@ -5,6 +5,7 @@ def objc_quote(val)
 end
 
 path = ARGV[0]
+puts "Processing: #{path}"
 path_ary = path.split(/\//)
 fname = path_ary.pop
 fname_parts = fname.split(".")
@@ -13,8 +14,6 @@ cname = path_ary[1]
 if cname.nil?
 	cname = fname_parts[0]
 end
-puts cname
-puts path
 if(fname_type == "nmv")
 	fname_action = fname_parts[0]
 	fname_format = fname_parts[1]
@@ -26,7 +25,6 @@ if(fname_type == "nmv")
 	f.close
 
 	data = data.gsub(/(?<=\%\>)(.*?)(?=\<\%)/m) {
-		puts "MATCH"
 		html_data = objc_quote($1)
 		cmd = <<EOF
 [buffer appendString:@"#{html_data}"];
@@ -37,7 +35,6 @@ EOF
 	data = data.gsub(/<%#(.*?)%>/m, "")
 
 	data = data.gsub(/<%=(.*?)%>/m) {
-		puts "MATCH2"
 		val = $1
 		cmd = <<EOF
 [buffer appendString: #{val}];
@@ -46,7 +43,6 @@ EOF
 	}
 
 	data = data.gsub(/<%(.*?)%>/m) {
-		puts "MATCH3"
 		cmd = $1
 		cmd
 	}
@@ -82,4 +78,3 @@ else
 	raise "Error processing file: #{path}"
 end
 
-puts fname
