@@ -6,7 +6,7 @@
 @end
 
 @implementation NewmView_MyTestController_myAction2_html 
--(NSData *)render {
+-(NSData *)render:(NMAbstractController *)ctrl {
 	return [@"This is my Rendered View" dataUsingEncoding:NSUTF8StringEncoding];
 }
 @end

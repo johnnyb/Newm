@@ -5,7 +5,7 @@
 #import "NMAbstractRequest.h"
 #import "NMAbstractResponse.h"
 
-@class NMNewmApp;
+@class NMRouteMap;
 
 @interface NMNewmApp : NSObject {
 	NMRouteMap *routeMap;

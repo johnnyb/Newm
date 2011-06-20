@@ -1,0 +1,17 @@
+<p>
+This is a test 567
+</p>
+
+<%
+	int i;
+	for(i = 0; i < 20; i++) {
+%>
+	Hello there! <%= INTSTR(i) %><br />
+<%
+	}
+
+%>
+
+<p>
+	<%= [controller className] %>
+</p>

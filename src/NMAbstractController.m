@@ -4,6 +4,7 @@
 
 @implementation NMAbstractController
 
+@synthesize application;
 @synthesize beforeFilters;
 @synthesize request;
 @synthesize response;
@@ -40,7 +41,11 @@
 -(void) runActionNamed:(NSString *)actionName {
 	SEL actionSelector = NSSelectorFromString(actionName);
 	[self runBeforeFilters];
-	[self performSelector:actionSelector];
+
+	//Only run action if we are able - otherwise, just hit the view
+	if([self respondsToSelector:actionSelector]) {
+		[self performSelector:actionSelector];
+	}
 
 	
 	// Get layout
@@ -58,16 +63,13 @@
 		if(v == nil) {
 			//FIXME - raise error
 		} else {
-			v.controller = self;
-			self.actionViewData = [v render];
+			self.actionViewData = [v render:self];
 			[v reset];
 
 			if(currentLayout == nil) {
 				finalData = actionViewData;
 			} else {
-				[currentLayout reset];
-				currentLayout.controller = self;
-				finalData = [currentLayout render];
+				finalData = [currentLayout render:self];
 				[currentLayout reset];
 			}
 

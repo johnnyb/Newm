@@ -36,6 +36,7 @@
 	NMAbstractController *controller = [[[controller_class alloc] init] autorelease];
 
 	// Initialize the controller
+	controller.application = self;
 	controller.request = req;
 	controller.response = resp;
 

@@ -4,15 +4,12 @@
 @class NMAbstractController;
 
 @interface NMAbstractView : NSObject {
-	NMAbstractController *controller;
 }
 
 +(NMAbstractView *) viewForControllerName:(NSString *)cname actionName:(NSString *)aname format:(NSString *)fmt;
 
 -(void) reset;
 
--(NSData *) render;
-
-@property (retain) NMAbstractController *controller;
+-(NSData *) render:(NMAbstractController *)ctrl;
 
 @end
