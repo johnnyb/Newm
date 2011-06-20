@@ -8,9 +8,10 @@ Currently runs as a CGI program, so you can export PATH_INFO and QUERY_STRING to
 
 To get the test application to run, do:
 
-cd src
-make
-export PATH_INFO=bbb/myAction3
-./a.out
+  cd src
+  make
+
+  export PATH_INFO=bbb/myAction3
+  build/newmapp
 
 
