@@ -1,6 +1,6 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "Newm.h"
+#import <Newm/Newm.h>
 
 @interface MyTestController : NMAbstractController {
 }

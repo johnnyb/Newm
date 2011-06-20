@@ -2,7 +2,7 @@
 
 //FIXME - need different layouts for different formats?
 
-#import "NMAbstractController.h"
+#import <Newm/NMAbstractController.h>
 
 @implementation NMAbstractController
 

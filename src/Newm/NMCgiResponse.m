@@ -1,6 +1,6 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "NMCgiResponse.h"
+#import <Newm/NMCgiResponse.h>
 
 @implementation NMCgiResponse
 

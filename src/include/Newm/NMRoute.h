@@ -1,8 +1,8 @@
 // Copyright 2011 Jonathan Bartlett
 
 #import <Foundation/Foundation.h>
-#import "NMAbstractRequest.h"
-#import "NMAbstractRoute.h"
+#import <Newm/NMAbstractRequest.h>
+#import <Newm/NMAbstractRoute.h>
 
 @interface NMRoute : NSObject<NMAbstractRoute> {
 	NSString *path;

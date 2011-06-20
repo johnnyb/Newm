@@ -1,8 +1,8 @@
 // Copyright 2011 Jonathan Bartlett
 
 #import <Foundation/Foundation.h>
-#import "NSDictionary+Newm.h"
-#import "NSString+Newm.h"
+#import <Newm/NSDictionary+Newm.h>
+#import <Newm/NSString+Newm.h>
 
 @implementation NSDictionary(Newm)
 +(NSMutableDictionary *) dictionaryFromURLEncodedQueryString:(NSString *)str {

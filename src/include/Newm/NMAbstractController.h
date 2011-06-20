@@ -3,10 +3,10 @@
 //FIXME - should the controller be holding on to a weak reference to the app?
 
 #import <Foundation/Foundation.h>
-#import "NMAbstractRequest.h"
-#import "NMAbstractResponse.h"
-#import "NMAbstractView.h"
-#import "NMNewmApp.h"
+#import <Newm/NMAbstractRequest.h>
+#import <Newm/NMAbstractResponse.h>
+#import <Newm/NMAbstractView.h>
+#import <Newm/NMNewmApp.h>
 
 @class NMAbstractView;
 @class NMNewmApp;

@@ -1,7 +1,7 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "Foundation/Foundation.h"
-#import "NMAbstractRequest.h"
+#import <Foundation/Foundation.h>
+#import <Newm/NMAbstractRequest.h>
 
 @interface NMCgiRequest : NMAbstractRequest {
 }

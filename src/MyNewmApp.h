@@ -1,7 +1,6 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "Newm.h"
-#import "NMNewmApp.h"
+#import <Newm/Newm.h>
 
 @interface MyNewmApp : NMNewmApp {
 }

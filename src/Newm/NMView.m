@@ -1,4 +1,4 @@
-#import "NMView.h"
+#import <Newm/NMView.h>
 
 @implementation NMView
 

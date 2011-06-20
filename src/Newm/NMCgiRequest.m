@@ -1,9 +1,9 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "Foundation/Foundation.h"
-#import "NMCgiRequest.h"
-#import "stdlib.h"
-#import "Newm.h"
+#import <Foundation/Foundation.h>
+#import <Newm/NMCgiRequest.h>
+#import <Newm/NSDictionary+Newm.h>
+#import <stdlib.h>
 
 // Return an empty string if the environment variable isn't set
 char *getenv2(char *var) {

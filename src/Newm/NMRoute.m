@@ -1,8 +1,8 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "NMRoute.h"
-#import "NSDictionary+Newm.h"
-#import "NSArray+Newm.h"
+#import <Newm/NMRoute.h>
+#import <Newm/NSDictionary+Newm.h>
+#import <Newm/NSArray+Newm.h>
 
 @implementation NMRoute
 

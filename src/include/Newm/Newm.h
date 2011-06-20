@@ -1,16 +1,15 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "NSString+Newm.h"
-#import "NSDictionary+Newm.h"
-#import "NSData+Newm.h"
-#import "NSMutableArray+Newm.h"
-#import "NMAbstractRequest.h"
-#import "NMAbstractController.h"
-#import "NMAbstractView.h"
-#import "NMRoute.h"
-#import "NewmGlobals.h"
-#import "NewmMacros.h"
-
+#import <Newm/NSString+Newm.h>
+#import <Newm/NSDictionary+Newm.h>
+#import <Newm/NSData+Newm.h>
+#import <Newm/NSMutableArray+Newm.h>
+#import <Newm/NMAbstractRequest.h>
+#import <Newm/NMAbstractController.h>
+#import <Newm/NMAbstractView.h>
+#import <Newm/NMRoute.h>
+#import <Newm/NewmGlobals.h>
+#import <Newm/NewmMacros.h>
 
 #define INITFUNC void __attribute__ ((constructor))
 #define FINIFUNC void __attribute__ ((destructor))

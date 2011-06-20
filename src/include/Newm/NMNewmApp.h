@@ -1,17 +1,15 @@
 // Copyright 2011 Jonathan Bartlett
 
 #import <Foundation/Foundation.h>
-#import "NMRouteMap.h"
-#import "NMAbstractRequest.h"
-#import "NMAbstractResponse.h"
+#import <Newm/NMRouteMap.h>
+#import <Newm/NMAbstractRequest.h>
+#import <Newm/NMAbstractResponse.h>
 
 @class NMRouteMap;
 
 @interface NMNewmApp : NSObject {
 	NMRouteMap *routeMap;
 }
-
-+(NMNewmApp *) boot;
 
 -(void) processRequest:(NMAbstractRequest *)req usingResponse:(NMAbstractResponse *)resp;
 

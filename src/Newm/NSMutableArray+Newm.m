@@ -1,5 +1,5 @@
-#import "NSMutableArray+Newm.h"
-#import "NSString+Newm.h"
+#import <Newm/NSMutableArray+Newm.h>
+#import <Newm/NSString+Newm.h>
 
 @implementation NSMutableArray(Newm)
 

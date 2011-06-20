@@ -1,5 +1,5 @@
-#import "NSArray+Newm.h"
-#import "NSMutableArray+Newm.h"
+#import <Newm/NSArray+Newm.h>
+#import <Newm/NSMutableArray+Newm.h>
 
 @implementation NSArray(Newm)
 -(NSArray *) arrayByTrimming {

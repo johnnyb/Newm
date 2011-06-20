@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "NMAbstractView.h"
+#import "Newm/NMAbstractView.h"
 
 @interface NewmView_view_MyTestController_myAction2_html : NMAbstractView {
 }

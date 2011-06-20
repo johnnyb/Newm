@@ -1,6 +1,6 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "NSString+Newm.h"
+#import <Newm/NSString+Newm.h>
 
 @implementation NSString(Newm)
 

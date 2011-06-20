@@ -1,6 +1,6 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "Foundation/Foundation.h"
+#import <Foundation/Foundation.h>
 
 @interface NMAbstractRequest : NSObject {
 	NSString *queryString;

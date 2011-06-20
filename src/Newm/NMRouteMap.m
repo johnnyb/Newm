@@ -1,6 +1,6 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "NMRouteMap.h"
+#import <Newm/NMRouteMap.h>
 
 @implementation NMRouteMap
 

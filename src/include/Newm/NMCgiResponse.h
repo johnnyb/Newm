@@ -1,6 +1,6 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "NMAbstractResponse.h"
+#import <Newm/NMAbstractResponse.h>
 
 @interface NMCgiResponse : NMAbstractResponse {
 }

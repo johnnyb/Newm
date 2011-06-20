@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "NMAbstractController.h"
+#import <Newm/NMAbstractController.h>
 
 @class NMAbstractController;
 

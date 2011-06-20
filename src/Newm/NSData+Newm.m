@@ -1,4 +1,4 @@
-#import "NSdata+Newm.h"
+#import <Newm/NSdata+Newm.h>
 
 @implementation NSData(Newm)
 -(NSString *)stringValue {

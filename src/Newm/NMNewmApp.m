@@ -1,9 +1,9 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import "NMNewmApp.h"
-#import "NewmGlobals.h"
-#import "NMRoute.h"
-#import "stdio.h"
+#import <Newm/NMNewmApp.h>
+#import <Newm/NMRoute.h>
+#import <Newm/NMAbstractController.h>
+#import <stdio.h>
 
 @implementation NMNewmApp
 

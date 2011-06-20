@@ -1,4 +1,4 @@
-#import "NMAbstractView.h"
+#import <Newm/NMAbstractView.h>
 
 @implementation NMAbstractView
 
