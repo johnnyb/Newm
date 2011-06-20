@@ -1,2 +1,2 @@
 clean:
-	rm -rf *.a *.o *.so
+	rm -rf *.a *.o *.so newmapp
