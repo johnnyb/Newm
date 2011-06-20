@@ -2,9 +2,22 @@
 
 @implementation NMAbstractView
 
-+(NMAbstractView *) viewForControllerName:(NSString *)cname actionName:(NSString *)aname format:(NSString *)fmt {
-	NSString *viewClassName = [NSString stringWithFormat:@"NewmView_%@_%@_%@", cname, aname, fmt];
++(NMAbstractView *) layoutForControllerName:(NSString *)cname format:(NSString *)fmt {
+	NSString *viewClassName = [NSString stringWithFormat:@"NewmView_layout_%@_%@", cname, fmt];
 	Class viewClass = objc_getClass([viewClassName cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(viewClass == nil) {
+		return nil;
+	}
+
+	NMAbstractView *v = [[viewClass alloc] init];
+	return v;
+}
++(NMAbstractView *) viewForControllerName:(NSString *)cname actionName:(NSString *)aname format:(NSString *)fmt {
+	NSString *viewClassName = [NSString stringWithFormat:@"NewmView_view_%@_%@_%@", cname, aname, fmt];
+	Class viewClass = objc_getClass([viewClassName cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(viewClass == nil) {
+		return nil;
+	}
 	NMAbstractView *v = [[viewClass alloc] init];
 
 	return v;

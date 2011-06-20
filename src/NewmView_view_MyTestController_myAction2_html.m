@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 #import "NMAbstractView.h"
 
-@interface NewmView_MyTestController_myAction2_html : NMAbstractView {
+@interface NewmView_view_MyTestController_myAction2_html : NMAbstractView {
 }
 @end
 
-@implementation NewmView_MyTestController_myAction2_html 
+@implementation NewmView_view_MyTestController_myAction2_html 
 -(NSData *)render:(NMAbstractController *)ctrl {
 	return [@"This is my Rendered View" dataUsingEncoding:NSUTF8StringEncoding];
 }

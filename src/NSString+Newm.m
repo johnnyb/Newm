@@ -22,4 +22,5 @@
 -(BOOL) empty {
 	return [self isEqualToString:@""];
 }
+
 @end

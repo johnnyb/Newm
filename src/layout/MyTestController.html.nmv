@@ -1,0 +1,5 @@
+HEADER
+
+<%= [controller.actionViewData stringValue] %>
+
+FOOTER

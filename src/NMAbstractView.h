@@ -7,6 +7,7 @@
 }
 
 +(NMAbstractView *) viewForControllerName:(NSString *)cname actionName:(NSString *)aname format:(NSString *)fmt;
++(NMAbstractView *) layoutForControllerName:(NSString *)cname format:(NSString *)fmt;
 
 -(void) reset;
 

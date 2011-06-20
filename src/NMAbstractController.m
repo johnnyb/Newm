@@ -1,5 +1,7 @@
 // Copyright 2011 Jonathan Bartlett
 
+//FIXME - need different layouts for different formats?
+
 #import "NMAbstractController.h"
 
 @implementation NMAbstractController
@@ -15,6 +17,8 @@
 -(id) init {
 	self = [super init];
 	self.beforeFilters = [NSMutableArray arrayWithCapacity:10];
+	self.defaultLayout = [NMAbstractView layoutForControllerName:[self className] format:@"html"];
+	self.currentLayout = defaultLayout;
 
 	return self;
 }

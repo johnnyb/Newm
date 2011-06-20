@@ -9,7 +9,12 @@ path_ary = path.split(/\//)
 fname = path_ary.pop
 fname_parts = fname.split(".")
 fname_type = fname_parts.pop
-cname = path_ary[0]
+cname = path_ary[1]
+if cname.nil?
+	cname = fname_parts[0]
+end
+puts cname
+puts path
 if(fname_type == "nmv")
 	fname_action = fname_parts[0]
 	fname_format = fname_parts[1]

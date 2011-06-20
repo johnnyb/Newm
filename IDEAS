@@ -7,6 +7,7 @@
 * Views can be re-used
 
 * Conventions:
-  * View Name: NewmView_controllername_actionname_format
+  * View Name: NewmView_view_controllername_actionname_format
+  * Layout Name: NewmView_layout_controllername_format
 
 * Controllers that define additional view data fields need to override reset and set them to nil between requests.  But this needs to call [super reset] as well.

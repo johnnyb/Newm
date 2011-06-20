@@ -2,6 +2,8 @@
 
 #import "NSString+Newm.h"
 #import "NSDictionary+Newm.h"
+#import "NSData+Newm.h"
+#import "NSMutableArray+Newm.h"
 #import "NMAbstractRequest.h"
 #import "NMAbstractController.h"
 #import "NMAbstractView.h"
