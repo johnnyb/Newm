@@ -3,7 +3,7 @@
 #import <Foundation/Foundation.h>
 #import "MyNewmApp.h"
 
-NSString *newmAppClassName = @"MyNewmApp";
+CGI_ENTRY_POINT(MyNewmApp)
 
 @implementation MyNewmApp
 

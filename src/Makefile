@@ -1,6 +1,9 @@
 all: views
 	gcc -Wall *.m -framework Foundation
 
+newm:
+
+
 views:
 	find view layout -type f -name '*.nmv'|xargs -n 1 ./buildview
 clean:

@@ -9,13 +9,6 @@
 
 @synthesize routeMap;
 
-+(NMNewmApp *) boot {
-	Class app_class = objc_getClass([newmAppClassName cStringUsingEncoding:NSUTF8StringEncoding]);
-	NMNewmApp *app = [[app_class alloc] init];
-
-	return app;
-}
-
 -(void) processRequest:(NMAbstractRequest *)req usingResponse:(NMAbstractResponse *)resp {
 	//use route map to map pathInfo into params, then use params to map to controllers and actions
 	NMRoute *route = [routeMap routeForRequest:req];
