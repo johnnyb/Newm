@@ -14,5 +14,6 @@
 
 @property (retain) NSMutableDictionary *headers;
 @property (retain) NSMutableData *content;
+@property (readonly) BOOL contentNeeded;
 
 @end

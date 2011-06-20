@@ -19,7 +19,7 @@
 }
 
 -(void) myAction2 {
-	[response writeContentString:@"My Action 2"];
+	//[response writeContentString:@"My Action 2"];
 }
 
 -(void) myBeforeFilter {

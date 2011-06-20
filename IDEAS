@@ -1,3 +1,12 @@
 * Need to separate out NMAbstractRequest into a protocol and an object
 
+* It would be cool to have a function to auto-detect if a file had changed, and then run a rebuild script which rebuilt and relaunched the app
 
+* Controllers can be re-used
+
+* Views can be re-used
+
+* Conventions:
+  * View Name: NewmView_controllername_actionname_format
+
+* Controllers that define additional view data fields need to override reset and set them to nil between requests.  But this needs to call [super reset] as well.

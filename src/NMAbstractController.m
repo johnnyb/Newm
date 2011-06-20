@@ -7,6 +7,9 @@
 @synthesize beforeFilters;
 @synthesize request;
 @synthesize response;
+@synthesize defaultLayout;
+@synthesize currentLayout;
+@synthesize actionViewData;
 
 -(id) init {
 	self = [super init];
@@ -16,8 +19,13 @@
 }
 
 -(void) reset {
+	/* Reset request data */
 	self.request = nil;
 	self.response = nil;
+	self.currentLayout = self.defaultLayout;
+
+	/* Reset view-oriented data */
+	self.actionViewData = nil;
 }
 
 -(void) runBeforeFilters {
@@ -29,16 +37,47 @@
 	}
 }
 
--(void) runAction:(SEL)selector {
+-(void) runActionNamed:(NSString *)actionName {
+	SEL actionSelector = NSSelectorFromString(actionName);
 	[self runBeforeFilters];
-	[self performSelector:selector];
+	[self performSelector:actionSelector];
+
+	
+	// Get layout
+	// render action into a "part"
+	// render layout with action
+
+	// write the output	
+
+	if(response.contentNeeded) {
+		NSData *finalData;
+
+		NSString *format = @"html";
+		NMAbstractView *v = [self viewForActionName:actionName format:format];
+		
+		if(v == nil) {
+			//FIXME - raise error
+		} else {
+			v.controller = self;
+			self.actionViewData = [v render];
+			[v reset];
+
+			if(currentLayout == nil) {
+				finalData = actionViewData;
+			} else {
+				[currentLayout reset];
+				currentLayout.controller = self;
+				finalData = [currentLayout render];
+				[currentLayout reset];
+			}
+
+			[response writeContentData:finalData];
+		}
+	}
 }
 
--(void) runActionNamed:(NSString *)actionName {
-
-	SEL actionSelector = NSSelectorFromString(actionName);
-
-	[self runAction:actionSelector];
+-(NMAbstractView *) viewForActionName:(NSString *)name format:(NSString *)fmt {
+	return [NMAbstractView viewForControllerName:[self className] actionName:name format:fmt];
 }
 
 -(void) addBeforeFilterWithSelector:(SEL)filter {
@@ -61,6 +100,9 @@
 	[beforeFilters release];
 	[request release];
 	[response release];
+	[defaultLayout release];
+	[currentLayout release];
+	[actionViewData release];
 
 	[super dealloc];
 }
