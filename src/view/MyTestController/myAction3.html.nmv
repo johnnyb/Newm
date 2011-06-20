@@ -1,3 +1,9 @@
+<%* assign
+	int count;
+%>
+<%* retain
+	id whatever;
+%>
 <p>
 This is a test 567
 </p>

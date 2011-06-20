@@ -25,7 +25,8 @@ NSString *stringForEnv(char *var) {
 -(void) loadEnvironmentVariables {
 	[super init];
 
-	int content_length = strtol(getenv2("CONTENT_LENGTH"), NULL, 10);
+	//FIXME - load STDIN into a data string/file somewhere and then parse the params
+	/* suppress compiler warnings */ //int content_length = strtol(getenv2("CONTENT_LENGTH"), NULL, 10);
 	self.queryString = stringForEnv("QUERY_STRING");
 	self.httpReferer = stringForEnv("HTTP_REFERER");
 	self.httpUserAgent = stringForEnv("HTTP_USER_AGENT");

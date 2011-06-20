@@ -8,8 +8,9 @@ Currently runs as a CGI program, so you can export PATH_INFO and QUERY_STRING to
 
 To get the test application to run, do:
 
-gcc -Wall *.m -framework Foundation
-export QUERY_STRING='controller=MyTestController&action=myAction'
+cd src
+make
+export PATH_INFO=bbb/myAction3
 ./a.out
 
 

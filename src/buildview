@@ -4,6 +4,17 @@ def objc_quote(val)
 	val.gsub("\n", "\\n").gsub("\r", " ").gsub('"', '\\"')
 end
 
+def varname(val)
+	v = nil
+	if(val =~ /(\w+)\s*$/)
+		v = $1
+	end
+
+	raise "Can't infer varname from #{val}" if v.nil?
+
+	return v
+end
+
 path = ARGV[0]
 puts "Processing: #{path}"
 path_ary = path.split(/\//)
@@ -32,6 +43,25 @@ EOF
 		cmd
 	}
 
+	retained_properties = []
+	data = data.gsub(/<%\*\s*retain(.*?)%>/m){
+		lines = $1
+		decls = lines.split(";")[0..-2]
+		retained_properties = retained_properties + decls
+		""  # Nothing goes in the output
+	}
+
+
+	unretained_properties = []
+	data = data.gsub(/<%\*\s*assign(.*?)%>/m){
+		lines = $1
+		decls = lines.split(";")[0..-2]
+		unretained_properties = unretained_properties + decls
+		""  # Nothing goes in the output
+	}
+
+	all_properties = retained_properties + unretained_properties
+
 	data = data.gsub(/<%#(.*?)%>/m, "")
 
 	data = data.gsub(/<%=(.*?)%>/m) {
@@ -49,6 +79,11 @@ EOF
 
 	data = data[2..-3]
 
+	instance_variables = all_properties.map{|x| "#{x};\n"}
+	property_decls = retained_properties.map{|x| "@property (retain) #{x};\n"} + unretained_properties.map{|x| "@property (assign) #{x};\n"}
+	synthesize_stmts = all_properties.map{|x| "@synthesize #{varname(x)};\n"}
+	release_stmts = retained_properties.map{|x| "[#{varname(x)} release];\n"}
+	reset_stmts = retained_properties.map{|x| "self.#{varname(x)} = nil;\n"} + unretained_properties.map{|x| "self.#{varname(x)} = 0;\n"}
 
 	File.open(clsfname, "w") do |f|
 		f.write(<<EOF)
@@ -58,18 +93,38 @@ EOF
 #import "#{cname}.h"
 
 @interface #{clsname} : NMAbstractView {
+	#{instance_variables.join("")}
 }
+
+#{property_decls.join("")}
 @end
 
 @implementation #{clsname}
+
+#{synthesize_stmts.join("")}
+
 -(NSData *)render:(NMAbstractController *)ctrl {
 	NSMutableString *buffer = [NSMutableString stringWithCapacity:50000];
 	#{cname} *controller = (#{cname} *)ctrl;
 
 	#{data}
 
-	return [buffer dataUsingEncoding:NSUTF8StringEncoding];
+	NSData *dat = [buffer dataUsingEncoding:NSUTF8StringEncoding];
+
+	[self reset];
+
+	return dat;
 }
+
+-(void) reset {
+	#{reset_stmts.join("")}
+}
+
+-(void) dealloc {
+	#{release_stmts.join("")}
+	[super dealloc];
+}
+
 @end
 
 EOF
