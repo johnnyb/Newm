@@ -1,19 +1,70 @@
-= Newm
+**** Newm - a Web Framework for Objective-C ****
 
-This is Newm.  Eventually it will be an Objective-C implementation of at least part of Ruby-on-Rails
+This is Newm.  Newm is a framework for writing web applications in Objective-C, loosely
+modeled after Ruby-on-Rails.  It's goal is to make web applications easy to write, maintain, 
+and deploy.
+
+*** Why Objective-C?  What's wrong with Ruby-on-Rails? ***
+
+There are several issues:
+
+1) Ruby is slow.  Like really slow.  Most interpreted languages are, and Ruby is painfully slow.
+The reason we switched to interpreted languages wasn't because there was some magic benefit to
+having slower programs, but because it allowed us to write code that wasn't painful.  But 
+Objective-C gives us 90% of the ease-of-use of scripting languages, but it's compiled, with real, 
+native types, that make it go very fast.
+
+2) Ruby is not statically typed.  This is often billed as an argument in favor of Ruby.  But in
+fact, this causes problems.  If you rename a variable, but forget to rename all the places you
+used it, you just created a time-bomb for your code.  Ruby doesn't care - the syntax is still right.
+You're users will just get a magic 500 error somewhere down the line.  Suckers.  But with a
+statically-typed language, the compiler checks your code.  This doesn't remove 100% of bugs, 
+but realistically it catches between 60% and 80% of your bugs before you even run or test the code.
+There are ways around static typing in Objective-C, but one of the goals of Newm is to *NOT* 
+get around the static typing, but instead use it to our full advantage.
+
+3) Ruby configuration is a nightmare.  In a compiled app, you specify what libraries you want.  
+You can statically link them in.  You can deploy by just copying the binary file.  Almost like magic!
+
+4) Rails deployment is a nighttmare.  Because it is interpreted, it is not uncommon for Rails to have
+5-10 second startup time.  That means, if you want a process handling a request, it has to be in place
+*BEFORE* serving it up.  Newm startup is nearly instantaneous.  You can run it as a CGI from Apache,
+and *still* be 5x faster than Rails.  Then, at the end of the process, it just exits.  It doesn't sit
+around guzzling memory on your server.
+
+It's time to take control back from your application server.
+
+It's time for Newm.
+
+*** Status ***
+
+Right now, Newm is in the *very* early stages of development.  It does not itself include any database 
+connectivity (though you can use OSX's Core Data), session handling, or a lot of view helpers.  It does
+include route maps, controllers, actions, views, and layouts.  If you are currently imagining a feature,
+it is probably not implemented yet.  Feel free to contribute!
+
+*** Installation ***
+
+Newm comes with a simple test app.  Simple is an overstatement, but you can see a few features.
 
 To build on OSX, go into the src directory and issue the following command:
 
-gcc -Wall *.m -framework Foundation
-
-Currently runs as a CGI program, so you can export PATH_INFO and QUERY_STRING to test
-
-To get the test application to run, do:
-
-  cd src
   make
 
-  export PATH_INFO=bbb/myAction3
-  build/newmapp
+This will build the framework, preprocess the views, build the app, and install it as public/newmapp.cgi
 
+Then, you need to point your webserver at the public directory.  Make sure that you have the "AllowOverride All" setting
+somewhere in httpd.conf.  If you have made the "public" directory the root of your localhost server, you can then see the
+test view by going to:
 
+http://localhost/bbb/myAction3
+
+This will put out the myAction3 view of the MyTestController controller, wrapped in the MyTestController layout.
+
+Take a look at the MyNewmApp.m file to get a feel for how routes are built.
+
+Right now, it helps if you have some Rails experience before working with Newm, because I don't have any tutorials about 
+how it works or what the terminology is.  Take a look at the test app and see what you can figure out.
+
+If you need help, or want to contribute, email me at jonathan@newmedio.com.  It will probably help to put "Newm" somewhere
+in the subject line.
