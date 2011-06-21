@@ -23,5 +23,5 @@ This is a test 567
 </p>
 
 <p>
-	<%= [controller.request.params description] %>
+	<%= [[[controller request] params] description] %>
 </p>

@@ -15,8 +15,13 @@
 -(void) setDefaultRoute:(id<NMAbstractRoute>)route;
 -(id<NMAbstractRoute>)routeNamed:(NSString *)nm;
 
-@property (retain) NSMutableArray *routeDefinitions;
-@property (retain) id<NMAbstractRoute> defaultRoute;
-@property (retain) NSMutableDictionary *routesByName;
+-(NSMutableArray *) routeDefinitions;
+-(void)setRouteDefinitions:(NSMutableArray *)val;
+
+-(id<NMAbstractRoute>) defaultRoute;
+-(void)setDefaultRoute:(id<NMAbstractRoute>)val;
+-(NSMutableDictionary *) routesByName;
+-(void)setRoutesByName:(NSMutableDictionary *)val;
+
 
 @end

@@ -4,16 +4,19 @@
 
 @implementation NMAbstractResponse
 
-@synthesize headers;
-@synthesize content;
+-(NSMutableDictionary *) headers { return headers; }
+-(void) setHeaders:(NSMutableDictionary *)val { [val retain]; [headers release]; headers = val; }
+
+-(NSMutableData *) content { return content; }
+-(void) setContent:(NSMutableData *)val { [val retain]; [content release]; content = val; }
 
 -(id) init {
 	self = [super init];
 
-	self.headers = [NSMutableDictionary dictionaryWithCapacity:10];
+	[self setHeaders: [NSMutableDictionary dictionaryWithCapacity:10]];
 	[headers setObject:@"text/html" forKey:@"Content-Type"];
 
-	self.content = [NSMutableData dataWithCapacity:200000];
+	[self setContent: [NSMutableData dataWithCapacity:200000]];
 
 	return self;
 }

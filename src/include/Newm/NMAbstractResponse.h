@@ -12,8 +12,12 @@
 -(void) sendHeaders;
 -(void) sendContent;
 
-@property (retain) NSMutableDictionary *headers;
-@property (retain) NSMutableData *content;
-@property (readonly) BOOL contentNeeded;
+-(NSMutableDictionary *) headers;
+-(void)setHeaders:(NSMutableDictionary *)val;
+
+-(NSMutableData *) content;
+-(void)setContent:(NSMutableData *)val;
+
+-(BOOL) contentNeeded;
 
 @end

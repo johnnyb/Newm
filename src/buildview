@@ -15,6 +15,22 @@ def varname(val)
 	return v
 end
 
+def capvarname(val)
+	v = varname(val)
+	return v[0..0].upcase + v[1..-1]
+end
+
+def typename(val)
+	v = nil
+	if(val =~ /^\s*([\w\s\*]+?)(\w+)\s*$/)
+		v = $1
+	end
+
+	raise "Can't infer typename from #{val}" if v.nil?
+
+	return v
+end
+
 path = ARGV[0]
 puts "Processing: #{path}"
 path_ary = path.split(/\//)
@@ -35,12 +51,12 @@ if(fname_type == "nmv")
 	data = "%>" + f.read + "<%"
 	f.close
 
-	data = data.gsub(/(?<=\%\>)(.*?)(?=\<\%)/m) {
+	data = data.gsub(/\%\>(.*?)\<\%/m) {
 		html_data = objc_quote($1)
 		cmd = <<EOF
 [buffer appendString:@"#{html_data}"];
 EOF
-		cmd
+		"%>#{cmd}<%"
 	}
 
 	retained_properties = []
@@ -80,10 +96,22 @@ EOF
 	data = data[2..-3]
 
 	instance_variables = all_properties.map{|x| "#{x};\n"}
-	property_decls = retained_properties.map{|x| "@property (retain) #{x};\n"} + unretained_properties.map{|x| "@property (assign) #{x};\n"}
-	synthesize_stmts = all_properties.map{|x| "@synthesize #{varname(x)};\n"}
+	property_decls = retained_properties.map{|x| 
+		v = varname(x)
+		v2 = v[0..0].upcase + v[1..-1]
+		dt = typename(x)
+		#"@property (retain) #{x};\n"} + unretained_properties.map{|x| "@property (assign) #{x};\n"
+		"-(#{dt}) #{v};\n-(void) set#{v2}:(#{dt})val;\n"
+	}
+	synthesize_stmts = retained_properties.map{|x| 
+		v = varname(x)
+		v2 = v[0..0].upcase + v[1..-1]
+		dt = typename(x)
+		"-(#{dt}) #{v} { return #{v}; }\n-(void) set#{v2}:(#{dt})val { [val retain]; [#{v} release]; #{v} = val; }\n"
+		#"@synthesize #{varname(x)};\n"
+	}
 	release_stmts = retained_properties.map{|x| "[#{varname(x)} release];\n"}
-	reset_stmts = retained_properties.map{|x| "self.#{varname(x)} = nil;\n"} + unretained_properties.map{|x| "self.#{varname(x)} = 0;\n"}
+	reset_stmts = retained_properties.map{|x| "[self set#{capvarname(x)}: nil];\n"} + unretained_properties.map{|x| "#{varname(x)} = 0;\n"}
 
 	File.open("generated/#{clsfname}", "w") do |f|
 		f.write(<<EOF)

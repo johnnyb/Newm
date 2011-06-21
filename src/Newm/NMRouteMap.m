@@ -4,15 +4,21 @@
 
 @implementation NMRouteMap
 
-@synthesize routeDefinitions;
-@synthesize defaultRoute;
-@synthesize routesByName;
+-(NSMutableArray *) routeDefinitions { return routeDefinitions; }
+-(void) setRouteDefinitions:(NSMutableArray *)val { [val retain]; [routeDefinitions release]; routeDefinitions = val; }
+
+-(id<NMAbstractRoute>) defaultRoute { return defaultRoute; }
+-(void) setDefaultRoute:(id<NMAbstractRoute>)val { [val retain]; [defaultRoute release]; defaultRoute = val; }
+
+-(NSMutableDictionary *) routesByName { return routesByName; }
+-(void) setRoutesByName:(NSMutableDictionary *)val { [val retain]; [routesByName release]; routesByName = val; }
+
 
 -(id) init {
 	self = [super init];
-	self.routeDefinitions = [NSMutableArray arrayWithCapacity:20];
-	self.defaultRoute = nil;
-	self.routesByName = [NSMutableDictionary dictionaryWithCapacity:20];
+	[self setRouteDefinitions: [NSMutableArray arrayWithCapacity:20]];
+	[self setDefaultRoute: nil];
+	[self setRoutesByName: [NSMutableDictionary dictionaryWithCapacity:20]];
 
 	return self;
 }
@@ -34,7 +40,7 @@
 
 -(id<NMAbstractRoute>)routeForRequest:(NMAbstractRequest *)req {
 	int i;
-	for(i = 0; i < routeDefinitions.count; i++) {
+	for(i = 0; i < [routeDefinitions count]; i++) {
 		id<NMAbstractRoute> route = [routeDefinitions objectAtIndex:i];
 		if([route matchesRequest:req]) {
 			return route;

@@ -6,7 +6,9 @@
 
 -(void) sendHeaders {
 	NSFileHandle *out = [NSFileHandle fileHandleWithStandardOutput];
-	for(id key in headers) {
+	id key;
+	NSEnumerator *enumerator = [headers keyEnumerator];
+	while((key = [enumerator nextObject])) {
 		id val = [headers objectForKey:key];
 		NSString *headerString = [NSString stringWithFormat:@"%@: %@\n", key, val];
 		[out writeData:[headerString dataUsingEncoding:NSUTF8StringEncoding]];

@@ -6,9 +6,14 @@
 
 @implementation NMRoute
 
-@synthesize path;
-@synthesize extraParams;
-@synthesize pathComponents;
+-(NSString *) path { return path; }
+-(void) setPath:(NSString *)val { [val retain]; [path release]; path = val; }
+
+-(NSDictionary *) extraParams { return extraParams; }
+-(void) setExtraParams:(NSDictionary *)val { [val retain]; [extraParams release]; extraParams = val; }
+
+-(NSArray *) pathComponents { return pathComponents; }
+-(void) setPathComponents:(NSArray *)val { [val retain]; [pathComponents release]; pathComponents = val; }
 
 +(NMRoute *)routeWithPath:(NSString *)rpath params:(NSDictionary *)p {
 	return [[[NMRoute alloc] initWithPath:rpath params:p] autorelease];
@@ -17,24 +22,24 @@
 -(id) initWithPath:(NSString *)rpath params:(NSDictionary *)p {
 	self = [super init];
 
-	self.path = rpath;
-	self.pathComponents = [[path componentsSeparatedByString:@"/"] arrayByTrimming];
-	self.extraParams = p;
+	[self setPath: rpath];
+	[self setPathComponents: [[path componentsSeparatedByString:@"/"] arrayByTrimming]];
+	[self setExtraParams: p];
 
 	return self;
 }
 
 -(void) applyToRequest:(NMAbstractRequest *)req {
-	[req.params addEntriesFromDictionary:extraParams];
-	NSArray *reqPathComps = [[req.pathInfo componentsSeparatedByString:@"/"] arrayByTrimming];
+	[[req params] addEntriesFromDictionary:extraParams];
+	NSArray *reqPathComps = [[[req pathInfo] componentsSeparatedByString:@"/"] arrayByTrimming];
 	int i;
-	for(i = 0; i < pathComponents.count; i++) {
+	for(i = 0; i < [pathComponents count]; i++) {
 		NSString *pcomp = [pathComponents objectAtIndex:i];
 		if([pcomp characterAtIndex:0] == ':') {
 			NSString *newkey = [pcomp substringFromIndex:1];
 			NSString *newval = [reqPathComps objectAtIndex:i];
 			if(newval != nil) {
-				[req.params setObject:newval forKey:newkey];
+				[[req params] setObject:newval forKey:newkey];
 			}
 		}
 	}
@@ -43,12 +48,12 @@
 -(BOOL) matchesRequest:(NMAbstractRequest *)req {
 	int i;
 
-	NSArray *reqPathComps = [[req.pathInfo componentsSeparatedByString:@"/"] arrayByTrimming];
+	NSArray *reqPathComps = [[[req pathInfo] componentsSeparatedByString:@"/"] arrayByTrimming];
 
-	if(pathComponents.count != reqPathComps.count) {
+	if([pathComponents count] != [reqPathComps count]) {
 		return NO;
 	}
-	for(i = 0; i < pathComponents.count; i++) {
+	for(i = 0; i < [pathComponents count]; i++) {
 		NSString *pcomp = [pathComponents objectAtIndex:i];
 		if([pcomp characterAtIndex:0] != ':') {
 			NSString *rpcomp = [reqPathComps objectAtIndex:i];
@@ -62,10 +67,12 @@
 }
 
 -(NSString *) pathFromParams:(NSDictionary *)p {
-	NSMutableArray *newPathComponents = [NSMutableArray arrayWithCapacity:(pathComponents.count + 2)];
+	NSMutableArray *newPathComponents = [NSMutableArray arrayWithCapacity:([pathComponents count] + 2)];
 	NSMutableDictionary *pathDict = [p mutableCopy];
 
-	for(NSString *key in [extraParams allKeys]) {
+	id key;
+	NSEnumerator *enumerator = [extraParams keyEnumerator];
+	while((key = [enumerator nextObject])) {
 		NSString *val = [extraParams objectForKey:key];
 		NSString *pdVal = [pathDict objectForKey:key];
 		if(![pdVal isEqual:val]) {
@@ -76,7 +83,7 @@
 	}
 
 	int i;	
-	for(i = 0; i < pathComponents.count; i++) {
+	for(i = 0; i < [pathComponents count]; i++) {
 		NSString *pcomp = [pathComponents objectAtIndex:i];
 		if([pcomp characterAtIndex:0] != ':') {
 			NSString *key = [pcomp substringFromIndex:1];
@@ -95,7 +102,7 @@
 
 	NSString *newPathString = [@"/" stringByAppendingString:[newPathComponents componentsJoinedByString:@"/"]];
 
-	if(pathDict.count > 0) {
+	if([pathDict count] > 0) {
 		newPathString = [newPathString stringByAppendingString:@"?"];
 		NSString *queryString = [pathDict URLQueryString];
 		newPathString = [newPathString stringByAppendingString:queryString];

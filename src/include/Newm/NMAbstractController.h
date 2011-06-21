@@ -32,24 +32,38 @@
 -(NMAbstractView *) viewForActionName:(NSString *)name format:(NSString *)format;
 
 // The application that put me here
-@property (assign) NMNewmApp *application;
+-(NMNewmApp *) application;
+-(void)setApplication:(NMNewmApp *)val;
+
 
 // A list of NSInvocation objects to call
-@property (retain) NSMutableArray *beforeFilters;
+-(NSMutableArray *) beforeFilters;
+-(void)setBeforeFilters:(NSMutableArray *)val;
+
 
 // This is the request used for calls
-@property (retain) NMAbstractRequest *request;
+-(NMAbstractRequest *) request;
+-(void)setRequest:(NMAbstractRequest *)val;
+
 
 // This is the response object to write for output
-@property (retain) NMAbstractResponse *response;
+-(NMAbstractResponse *) response;
+-(void)setResponse:(NMAbstractResponse *)val;
+
 
 // This is the default layout set at initialization time.  THIS SHOULD NOT BE MODIFIED AFTER CONTROLLER INITIALIZATION!
-@property (retain) NMAbstractView *defaultLayout;
+-(NMAbstractView *) defaultLayout;
+-(void)setDefaultLayout:(NMAbstractView *)val;
+
 
 // This is the layout used for the current request
-@property (retain) NMAbstractView *currentLayout;
+-(NMAbstractView *) currentLayout;
+-(void)setCurrentLayout:(NMAbstractView *)val;
+
 
 // This is the action's data for use in the layout
-@property (retain) NSData *actionViewData;
+-(NSData *) actionViewData;
+-(void)setActionViewData:(NSData *)val;
+
 
 @end

@@ -15,7 +15,7 @@
 -(void) myAction {
 	//FIXME - need to create a response object to write back through
 	[response writeContentString:@"Hello there!\n"];
-	[response writeContentString:[NSString stringWithFormat:@"path Info: %@", request.pathInfo]];
+	[response writeContentString:[NSString stringWithFormat:@"path Info: %@", [request pathInfo]]];
 }
 
 -(void) myAction2 {

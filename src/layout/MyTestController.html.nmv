@@ -1,5 +1,5 @@
 HEADER
 
-<%= [controller.actionViewData stringValue] %>
+<%= [[controller actionViewData] stringValue] %>
 
 FOOTER

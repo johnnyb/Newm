@@ -8,11 +8,11 @@
 }
 
 -(NSString *)URLEncode {
-	int len = self.length;
+	int len = [self length];
 	char *encodedBytes = malloc((len * 3) + 1); // This should prevent us from having to worry about overflowing the buffer
 	int myOffset = 0;
 	int encodedOffset = 0;
-	const char *myBytes = self.bytes;
+	const char *myBytes = [self bytes];
 	unsigned char c;
 	for(myOffset = 0; myOffset < len; myOffset++) {
 		c = myBytes[myOffset];
@@ -35,7 +35,7 @@
 }
 
 -(BOOL) isEmpty {
-	return self.length == 0;
+	return [self length] == 0;
 }
 
 @end

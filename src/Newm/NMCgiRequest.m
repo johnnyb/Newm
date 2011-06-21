@@ -26,18 +26,18 @@ NSString *stringForEnv(char *var) {
 -(void) loadEnvironmentVariables {
 	[super init];
 
-	self.queryString = stringForEnv("QUERY_STRING");
-	self.contentType = stringForEnv("CONTENT_TYPE");
-	self.httpReferer = stringForEnv("HTTP_REFERER");
-	self.httpUserAgent = stringForEnv("HTTP_USER_AGENT");
-	self.pathInfo = stringForEnv("PATH_INFO");
-	self.remoteAddress = stringForEnv("REMOTE_ADDR");
-	self.requestMethod = stringForEnv("REQUEST_METHOD");
-	self.serverName = stringForEnv("SERVER_NAME");
-	self.port = strtol(getenv2("SERVER_PORT"), NULL, 10);
+	[self setQueryString: stringForEnv("QUERY_STRING")];
+	[self setContentType: stringForEnv("CONTENT_TYPE")];
+	[self setHttpReferer: stringForEnv("HTTP_REFERER")];
+	[self setHttpUserAgent: stringForEnv("HTTP_USER_AGENT")];
+	[self setPathInfo: stringForEnv("PATH_INFO")];
+	[self setRemoteAddress: stringForEnv("REMOTE_ADDR")];
+	[self setRequestMethod: stringForEnv("REQUEST_METHOD")];
+	[self setServerName: stringForEnv("SERVER_NAME")];
+	[self setPort: strtol(getenv2("SERVER_PORT"), NULL, 10)];
 
 	// Parse Query String Data
-	self.params = [NSDictionary dictionaryFromURLEncodedQueryString:queryString];
+	[self setParams: [NSDictionary dictionaryFromURLEncodedQueryString:queryString]];
 
 	// Manage POST data
 	int content_length = strtol(getenv2("CONTENT_LENGTH"), NULL, 10);
@@ -46,7 +46,7 @@ NSString *stringForEnv(char *var) {
 	} else {
 		if(content_length > 0) {
 			NSFileHandle *fh = [NSFileHandle fileHandleWithStandardInput];
-			self.postData = [fh readDataToEndOfFile];
+			[self setPostData: [fh readDataToEndOfFile]];
 			NSDictionary *postDict = [NSDictionary dictionaryFromURLEncodedQueryString:[postData stringValue]];
 			[params addEntriesFromDictionary:postDict];
 		}

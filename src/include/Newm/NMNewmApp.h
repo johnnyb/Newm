@@ -13,6 +13,8 @@
 
 -(void) processRequest:(NMAbstractRequest *)req usingResponse:(NMAbstractResponse *)resp;
 
-@property (retain) NMRouteMap *routeMap;
+-(NMRouteMap *) routeMap;
+-(void)setRouteMap:(NMRouteMap *)val;
+
 
 @end

@@ -11,9 +11,9 @@
 	return [[self dataUsingEncoding:NSUTF8StringEncoding] URLEncode];
 }
 -(NSString *) URLDecode {
-	int len = self.length;
+	int len = [self length];
 	NSData *data = [self dataUsingEncoding:NSASCIIStringEncoding];
-	const char *dataBytes = data.bytes;
+	const char *dataBytes = [data bytes];
 	char *buffer = malloc(len + 1);
 	unichar c;
 	unichar d;
@@ -64,7 +64,7 @@
 }
 
 -(BOOL) isEmpty {
-	return self.length == 0;
+	return [self length] == 0;
 }
 
 @end

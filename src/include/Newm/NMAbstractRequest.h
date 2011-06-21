@@ -21,16 +21,37 @@
 -(void) process;
 
 
-@property (retain) NSString *queryString;
-@property (retain) NSData *postData;
-@property (retain) NSString *httpReferer;
-@property (retain) NSString *httpUserAgent;
-@property (retain) NSString *pathInfo;
-@property (retain) NSString *remoteAddress;
-@property (retain) NSString *requestMethod;
-@property (retain) NSString *serverName;
-@property (retain) NSString *contentType;
-@property (retain) NSMutableDictionary *params;
-@property int port;
+-(NSString *) queryString;
+-(void)setQueryString:(NSString *)val;
+
+-(NSData *) postData;
+-(void)setPostData:(NSData *)val;
+
+-(NSString *) httpReferer;
+-(void)setHttpReferer:(NSString *)val;
+
+-(NSString *) httpUserAgent;
+-(void)setHttpUserAgent:(NSString *)val;
+
+-(NSString *) pathInfo;
+-(void)setPathInfo:(NSString *)val;
+
+-(NSString *) remoteAddress;
+-(void)setRemoteAddress:(NSString *)val;
+
+-(NSString *) requestMethod;
+-(void)setRequestMethod:(NSString *)val;
+
+-(NSString *) serverName;
+-(void)setServerName:(NSString *)val;
+
+-(NSString *) contentType;
+-(void)setContentType:(NSString *)val;
+
+-(NSMutableDictionary *) params;
+-(void)setParams:(NSMutableDictionary *)val;
+
+-(int) port;
+-(void)setPort:(int)val;
 
 @end

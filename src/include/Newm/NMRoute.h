@@ -13,8 +13,14 @@
 +(NMRoute *)routeWithPath:(NSString *)rpath params:(NSDictionary *)p;
 -(id) initWithPath:(NSString *)rpath params:(NSDictionary *)p;
 
-@property (retain) NSString *path;
-@property (retain) NSDictionary *extraParams;
-@property (retain) NSArray *pathComponents;
+-(NSString *) path;
+-(void)setPath:(NSString *)val;
+
+-(NSDictionary *) extraParams;
+-(void)setExtraParams:(NSDictionary *)val;
+
+-(NSArray *) pathComponents;
+-(void)setPathComponents:(NSArray *)val;
+
 
 @end
