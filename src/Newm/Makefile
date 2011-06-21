@@ -3,7 +3,7 @@ all: newmlib
 newmlib: static
 
 objectfiles:
-	gcc -I ../include/ *.m -c
+	gcc -Wall -I ../include/ *.m -c
 
 static: objectfiles
 	libtool -static *.o -framework Foundation -o ../build/libnewm.a

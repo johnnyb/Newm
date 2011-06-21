@@ -2,4 +2,6 @@
 
 @interface NSData(Newm)
 -(NSString *)stringValue;
+-(NSString *)URLEncode;
+-(BOOL) isEmpty;
 @end

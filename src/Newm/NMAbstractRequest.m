@@ -5,6 +5,7 @@
 
 @implementation NMAbstractRequest
 
+@synthesize contentType;
 @synthesize queryString;
 @synthesize postData;
 @synthesize httpReferer;
@@ -30,6 +31,7 @@
 	[requestMethod release];
 	[serverName release];
 	[params release];
+	[contentType release];
 
 	[super dealloc];
 }

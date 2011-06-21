@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
+// FIXME - no file support yet!
+
 @interface NMAbstractRequest : NSObject {
 	NSString *queryString;
 	NSData *postData;
@@ -11,6 +13,7 @@
 	NSString *remoteAddress;
 	NSString *requestMethod;
 	NSString *serverName;
+	NSString *contentType;
 	NSMutableDictionary *params;
 	int port;
 }
@@ -26,6 +29,7 @@
 @property (retain) NSString *remoteAddress;
 @property (retain) NSString *requestMethod;
 @property (retain) NSString *serverName;
+@property (retain) NSString *contentType;
 @property (retain) NSMutableDictionary *params;
 @property int port;
 
