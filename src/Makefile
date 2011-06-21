@@ -5,10 +5,10 @@ LINUX_CFLAGS=-fconstant-string-class=NSConstantString -fobjc-exceptions -Wall -L
 LINUX_LINKFLAGS=-lobjc -lgnustep-base -Wl,-whole-archive -lnewm -Wl,-no-whole-archive
 
 OSX_CFLAGS=-Wall -I. -I include -L build -framework Foundation 
-OSX_LINKFLAGS=-lnewm -ObjC
+OSX_LINKFLAGS=-lnewm -ObjC -framework Foundation
 
 CFLAGS=$(LINUX_CFLAGS)
-LINKFLAGS=$(LINUX_LINKFLAGS)
+LINKFLAGS=$(OSX_LINKFLAGS)
 
 all: newmlib app
 
