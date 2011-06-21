@@ -1,12 +1,19 @@
+LINUX_CFLAGS=-Wall -fconstant-string-class=NSConstantString -fobjc-exceptions -Wall -I ../include/ -I /usr/GNUstep/System/Library/Headers -D_NATIVE_OBJC_EXCEPTIONS
+OSX_CFLAGS=-Wall -I ../include 
+CFLAGS=$(LINUX_CFLAGS)
+
 all: newmlib
 
 newmlib: static
 
 objectfiles:
-	gcc -Wall -I ../include/ *.m -c
+	#gcc -Wall -I ../include/ -I /usr/GNUstep/System/Library/Headers *.m -c
+	gcc $(CFLAGS) -c *.m
 
 static: objectfiles
-	libtool -static *.o -framework Foundation -o ../build/libnewm.a
+	ar cru ../build/libnewm.a *.o
+	ranlib ../build/libnewm.a
+	#libtool -static *.o -o ../build/libnewm.a
 
 # NOTE - dynamic building doesn't really work yet
 dynamic: objectfiles
