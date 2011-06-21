@@ -15,11 +15,13 @@
 		NSString *comp = [comps objectAtIndex:i];
 		NSArray *keyval = [comp componentsSeparatedByString:@"="];
 		NSString *key = [[keyval objectAtIndex:0] URLDecode];
-		NSString *val = @"";
-		if(keyval.count > 1) {
-			val = [[keyval objectAtIndex:1] URLDecode];
+		if(key.length != 0) {
+			NSString *val = @"";
+			if(keyval.count > 1) {
+				val = [[keyval objectAtIndex:1] URLDecode];
+			}
+			[dict setObject:val forKey:key];
 		}
-		[dict setObject:val forKey:key];
 	}
 
 	return dict;
