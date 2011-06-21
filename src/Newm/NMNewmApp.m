@@ -14,7 +14,7 @@
 	NMRoute *route = [routeMap routeForRequest:req];
 	if(route == nil) {
 		//FIXME - raise an error
-		fprintf(stderr, "NO ROUTE FOUND!\n");
+		fprintf(stderr, "NO ROUTE FOUND for %s!\n", [req.pathInfo cStringUsingEncoding:NSUTF8StringEncoding]);
 	}
 	[route applyToRequest:req];
 	NSString *actionName = [req.params objectForKey:@"action"];

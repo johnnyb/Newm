@@ -1,0 +1,13 @@
+AddHandler cgi-script .cgi
+Options +FollowSymLinks +ExecCGI
+
+RewriteEngine On
+# From Rails - not sure what they are for
+#RewriteRule ^$ cache/index.html [QSA]
+#RewriteRule ^([^.]+)$ cache/$1.html [QSA]
+
+# Skip if the file exists
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Otherwise, run the application
+RewriteRule ^(.*)$ newmapp.cgi/$1 [QSA,L]

@@ -5,6 +5,7 @@ all: newmlib app
 
 app: views
 	gcc -I . -Wall generated/*.m *.m -I include -L build -framework Foundation -lnewm -ObjC -o build/newmapp
+	cp build/newmapp public/newmapp.cgi
 
 newmlib:
 	cd Newm; $(MAKE) 
@@ -15,3 +16,4 @@ clean:
 	cd generated; $(MAKE) clean
 	cd build; $(MAKE) clean
 	cd Newm; $(MAKE) clean
+	rm public/newmapp.cgi
