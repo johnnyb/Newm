@@ -1,10 +1,10 @@
 // Copyright 2011 Jonathan Bartlett
 
 #import <Foundation/Foundation.h>
-#import <Newm/NMCookieJar.h>
 
 // FIXME - no file support yet!
 
+@class NMCookieJar;
 @interface NMAbstractRequest : NSObject {
 	NSString *queryString;
 	NSData *postData;

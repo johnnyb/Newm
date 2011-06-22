@@ -28,7 +28,7 @@
 			NSArray *keyval = [cookieline componentsSeparatedByString:@"="];
 			NSString *key = [[keyval objectAtIndex:0] URLDecode];
 			NSString *val = [[keyval objectAtIndex:1] URLDecode];
-			[self setCookieValueString:val forKey:key];
+			[self setCookieValue:val forKey:key];
 		}
 	}
 }
@@ -37,17 +37,13 @@
 	return [cookies objectForKey:key];
 }
 
--(NSString *) cookieValueStringForKey:(NSString *)key {
+-(NSString *) cookieValueForKey:(NSString *)key {
 	NMCookie *c = [cookies objectForKey:key];
-	if(c == nil) {
-		return nil;
-	} else {
-		return [c stringValue];
-	}
+	return [c value];
 }
 
--(void) setCookieValueString:(NSString *)val forKey:(NSString *)key {
-	NMCookie *c = [[[NMCookie alloc] initWithKey:key valueString:val] autorelease];
+-(void) setCookieValue:(NSString *)val forKey:(NSString *)key {
+	NMCookie *c = [[[NMCookie alloc] initWithKey:key value:val] autorelease];
 	[cookies setObject:c forKey:key];
 }
 
@@ -57,6 +53,17 @@
 
 -(NSArray *) cookies {
 	return [cookies allValues];
+}
+
+-(NSDictionary *) cookieValueDictionary {
+	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:[cookies count]];
+	NSEnumerator *e = [cookies objectEnumerator];
+	NMCookie *c;
+	while((c = [e nextObject])) {
+		[dict setObject:[c value] forKey:[c key]];
+	}
+
+	return dict;
 }
 
 -(void) dealloc {

@@ -8,9 +8,10 @@
 -(void) setCookiesUsingCookieHeaderValue:(NSString *)cookieString;
 
 -(NMCookie *) cookieForKey:(NSString *)key;
--(NSString *) cookieValueStringForKey:(NSString *)key;
--(void) setCookieValueString:(NSString *)val forKey:(NSString *)key;
+-(NSString *) cookieValueForKey:(NSString *)key;
+-(void) setCookieValue:(NSString *)val forKey:(NSString *)key;
 -(void) setCookie:(NMCookie *)cookie;
 -(NSArray *) cookies;
+-(NSDictionary *) cookieValueDictionary;
 
 @end

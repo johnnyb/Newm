@@ -1,9 +1,22 @@
 #import <Newm/NMCgiRequest.h>
 #import <Newm/NMCgiResponse.h>
+#import <Newm/NSString+Newm.h>
+#import <Newm/NSDictionary+Newm.h>
+#import <Newm/NSArray+Newm.h>
 
 //FIXME - need to define a protocol to send this message?
 #define IS_EMPTY(val) ((val) == nil ? YES : ([(val) respondsToSelector:@selector(isEmpty)] ? [(val) isEmpty] : NO ))
 #define INTSTR(val) ([NSString stringWithFormat:@"%d", (val)])
+
+#define OBJC_ACC_ASSIGN(type, var, getter, setter) -(type) getter { return var; }\
+-(void) setter:(type)val { var = val; }
+
+#define OBJC_ACC(type, var, getter, setter) -(type) getter { return var; } \
+-(void) setter:(type)val { [val retain]; [var release]; var = val; }
+
+#define OBJC_ACC_DECL(type, getter, setter) -(type) getter; \
+-(void) setter:(type)val;
+
 
 #define NEWM_APP (globalNewmApp)
 

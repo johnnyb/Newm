@@ -2,6 +2,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Newm/NMCgiRequest.h>
+#import <Newm/NMCookieJar.h>
 #import <Newm/NSDictionary+Newm.h>
 #import <Newm/NSData+Newm.h>
 #import <stdlib.h>
@@ -54,6 +55,9 @@ NSString *stringForEnv(char *var) {
 
 	// Parse Cookies
 	[self setCookieJar:[NMCookieJar cookieJarForCookieHeaderValue:stringForEnv("HTTP_COOKIE")]];
+
+	NSLog(@"Cookies: %@", [cookieJar cookieValueDictionary]);
+	NSLog(@"Header: %@", [[cookieJar cookieForKey:@"a"] headerStringForSetCookie]);
 }
 
 @end
