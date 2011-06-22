@@ -55,9 +55,6 @@ NSString *stringForEnv(char *var) {
 
 	// Parse Cookies
 	[self setCookieJar:[NMCookieJar cookieJarForCookieHeaderValue:stringForEnv("HTTP_COOKIE")]];
-
-	NSLog(@"Cookies: %@", [cookieJar cookieValueDictionary]);
-	NSLog(@"Header: %@", [[cookieJar cookieForKey:@"a"] headerStringForSetCookie]);
 }
 
 @end

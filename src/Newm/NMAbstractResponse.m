@@ -4,11 +4,10 @@
 
 @implementation NMAbstractResponse
 
--(NSMutableDictionary *) headers { return headers; }
--(void) setHeaders:(NSMutableDictionary *)val { [val retain]; [headers release]; headers = val; }
-
--(NSMutableData *) content { return content; }
--(void) setContent:(NSMutableData *)val { [val retain]; [content release]; content = val; }
+OBJC_ACC(NSMutableDictionary *, headers, headers, setHeaders)
+OBJC_ACC(NSMutableData *, content, content, setContent)
+OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
+OBJC_ACC(idSessionType, session, session, setSession)
 
 -(id) init {
 	self = [super init];
@@ -36,6 +35,30 @@
 		return YES;
 	} else {
 		return NO;
+	}
+}
+
+-(void) addHeaderValue:(NSString *)val forField:(NSString *)fld {
+	NSMutableArray *ary = [headers objectForKey:fld];
+	if(ary == nil) {
+		ary = [NSMutableArray arrayWithCapacity:5];
+		[headers setObject:ary forKey:fld];
+	}
+	[ary addObject:val];
+}
+
+-(void) setHeaderValue:(NSString *)val forField:(NSString *)fld {
+	[headers removeObjectForKey:fld];
+	[self addHeaderValue:val forField:fld];
+}
+
+-(void) prepareSendHeaders {
+	// Serialize session as a cookie
+	if(session != nil) {
+	}
+
+	// Serialize cookies as headers
+	if(!IS_EMPTY(cookieJar)) {
 	}
 }
 

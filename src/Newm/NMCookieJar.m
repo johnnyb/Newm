@@ -2,6 +2,7 @@
 #import <Newm/NMCookieJar.h>
 #import <Newm/NewmMacros.h>
 #import <Newm/NSString+Newm.h>
+#import <Newm/NSDictionary+Newm.h>
 
 @implementation NMCookieJar
 
@@ -43,7 +44,17 @@
 }
 
 -(void) setCookieValue:(NSString *)val forKey:(NSString *)key {
+	[self setCookieValue:val forKey:key expires:nil];
+}
+-(void) setCookieValue:(NSString *)val forKey:(NSString *)key expires:(NSDate *)exp {
 	NMCookie *c = [[[NMCookie alloc] initWithKey:key value:val] autorelease];
+	[c setExpires:exp];
+	if(defaultDomain != nil) {
+		[c setDomain:defaultDomain];
+	}
+	if(defaultPath != nil) {
+		[c setPath:defaultPath];
+	}
 	[cookies setObject:c forKey:key];
 }
 
@@ -64,6 +75,13 @@
 	}
 
 	return dict;
+}
+
+OBJC_ACC(NSString *, defaultDomain, defaultDomain, setDefaultDomain)
+OBJC_ACC(NSString *, defaultPath, defaultPath, setDefaultPath)
+
+-(BOOL) isEmpty {
+	return IS_EMPTY(cookies);
 }
 
 -(void) dealloc {

@@ -8,10 +8,9 @@
 #import <Newm/NMAbstractController.h>
 #import <Newm/NMAbstractView.h>
 #import <Newm/NMRoute.h>
+#import <Newm/NMCgiRequest.h>
+#import <Newm/NMCgiResponse.h>
 #import <Newm/NewmGlobals.h>
 #import <Newm/NewmMacros.h>
-
-#define INITFUNC void __attribute__ ((constructor))
-#define FINIFUNC void __attribute__ ((destructor))
 
 

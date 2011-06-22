@@ -1,5 +1,3 @@
-#import <Newm/NMCgiRequest.h>
-#import <Newm/NMCgiResponse.h>
 #import <Newm/NSString+Newm.h>
 #import <Newm/NSDictionary+Newm.h>
 #import <Newm/NSArray+Newm.h>
@@ -18,7 +16,12 @@
 -(void) setter:(type)val;
 
 
-#define NEWM_APP (globalNewmApp)
+#define NEWM_APP() (globalNewmApp)
+
+/* Not sure I need these, but good to have around */
+#define INITFUNC void __attribute__ ((constructor))
+#define FINIFUNC void __attribute__ ((destructor))
+
 
 /* Entry Point Definitions */
 #define CGI_ENTRY_POINT(cls) int main() { NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; cls *app = [[[cls alloc] init] autorelease]; NMCgiRequest *req = [[[NMCgiRequest alloc] init] autorelease]; globalNewmApp = app; NMCgiResponse *resp = [[[NMCgiResponse alloc] init] autorelease]; [req loadEnvironmentVariables]; [app processRequest:req usingResponse:resp]; [pool drain];  return 0; }
