@@ -1,7 +1,8 @@
 #import <Newm/NMCgiRequest.h>
 #import <Newm/NMCgiResponse.h>
 
-#define IS_EMPTY(val) ((val) == nil ? YES : ([(val) respondsToSelector:isEmpty] ? [(val) isEmpty] : NO ))
+//FIXME - need to define a protocol to send this message?
+#define IS_EMPTY(val) ((val) == nil ? YES : ([(val) respondsToSelector:@selector(isEmpty)] ? [(val) isEmpty] : NO ))
 #define INTSTR(val) ([NSString stringWithFormat:@"%d", (val)])
 
 #define NEWM_APP (globalNewmApp)

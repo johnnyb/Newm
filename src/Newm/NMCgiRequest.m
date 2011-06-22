@@ -51,6 +51,9 @@ NSString *stringForEnv(char *var) {
 			[params addEntriesFromDictionary:postDict];
 		}
 	}
+
+	// Parse Cookies
+	[self setCookieJar:[NMCookieJar cookieJarForCookieHeaderValue:stringForEnv("HTTP_COOKIE")]];
 }
 
 @end

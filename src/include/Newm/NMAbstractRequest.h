@@ -1,6 +1,7 @@
 // Copyright 2011 Jonathan Bartlett
 
 #import <Foundation/Foundation.h>
+#import <Newm/NMCookieJar.h>
 
 // FIXME - no file support yet!
 
@@ -15,6 +16,7 @@
 	NSString *serverName;
 	NSString *contentType;
 	NSMutableDictionary *params;
+	NMCookieJar *cookieJar;
 	int port;
 }
 
@@ -50,6 +52,9 @@
 
 -(NSMutableDictionary *) params;
 -(void)setParams:(NSMutableDictionary *)val;
+
+-(NMCookieJar *) cookieJar;
+-(void)setCookieJar:(NMCookieJar *)val;
 
 -(int) port;
 -(void)setPort:(int)val;

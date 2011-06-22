@@ -10,4 +10,6 @@
 -(NSString *) xmlEncode;
 -(NSString *) xmlDecode;
 -(BOOL) isEmpty;
+-(NSString *) validatableStringForSecret:(NSString *)secret;
+-(NSString *) validatedStringForSecret:(NSString *)secret;
 @end

@@ -35,6 +35,9 @@
 -(NSMutableDictionary *) params { return params; }
 -(void) setParams:(NSMutableDictionary *)val { [val retain]; [params release]; params = val; }
 
+-(NMCookieJar *) cookieJar { return cookieJar; }
+-(void) setCookieJar:(NMCookieJar *)val { [val retain]; [cookieJar release]; cookieJar = val; }
+
 -(int) port { return port; }
 -(void) setPort:(int)val { port = val; }
 
