@@ -36,7 +36,7 @@
 -(void) runBeforeFilters;
 -(void) runActionNamed:(NSString *)actionName;
 -(NMAbstractView *) viewForActionName:(NSString *)name format:(NSString *)format;
--(void) prepareResponseForSendingContent;
+-(void) prepareResponseForSendingHeaders;
 
 // The application that put me here
 OBJC_ACC_DECL(NMNewmApp *, application, setApplication)

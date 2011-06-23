@@ -48,6 +48,10 @@
 	return self;
 }
 
+-(NSString *)sessionCookieKey {
+	return [@"_session_" stringByAppendingString:[self className]];
+}
+
 -(void) dealloc {
 	[routeMap release];
 

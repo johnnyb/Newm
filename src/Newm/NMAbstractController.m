@@ -4,6 +4,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Newm/NMAbstractController.h>
+#import <Newm/NSData+Newm.h>
+#import <Newm/NMCookieJar.h>
 
 @implementation NMAbstractController
 
@@ -46,10 +48,17 @@ OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 	}
 }
 
--(void) prepareResponseForSendingContent {
+-(void) prepareResponseForSendingHeaders {
 	// Serialize and sign session into cookiejar
+	NSData *output = [NSKeyedArchiver archivedDataWithRootObject:session];
+	[cookieJar setCookieValue:[output base64Encoding] forKey:[application sessionCookieKey]];
 
 	// Serialize cookiejar into headers
+	NMCookie *cookie;
+	NSEnumerator *e = [[cookieJar cookies] objectEnumerator];
+	while((cookie = [e nextObject])) {
+		[response addHeaderValue:[cookie headerStringForSetCookie] forField:@"Set-Cookie"];
+	}		
 }
 
 -(void) runActionNamed:(NSString *)actionName {
@@ -87,7 +96,7 @@ OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 				[currentLayout reset];
 			}
 
-			[self prepareResponseForSendingContent];
+			[self prepareResponseForSendingHeaders];
 			[response writeContentData:finalData];
 		}
 	}

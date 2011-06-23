@@ -38,4 +38,8 @@
 	return [self length] == 0;
 }
 
+-(NSString *) base64Encoding {
+	return [[[[self description] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""];
+}
+
 @end

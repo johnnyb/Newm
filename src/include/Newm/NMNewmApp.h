@@ -15,6 +15,7 @@
 
 -(NMRouteMap *) routeMap;
 -(void)setRouteMap:(NMRouteMap *)val;
+-(NSString *)sessionCookieKey;
 
 
 @end
