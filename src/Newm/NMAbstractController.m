@@ -8,27 +8,15 @@
 @implementation NMAbstractController
 
 // No retaining to prevent retain cycles
--(NMNewmApp *) application { return application; }
--(void) setApplication:(NMNewmApp *)val { application = val; } 
-
--(NSMutableArray *) beforeFilters { return beforeFilters; }
--(void) setBeforeFilters:(NSMutableArray *)val { [val retain]; [beforeFilters release]; beforeFilters = val; }
-
--(NMAbstractRequest *) request { return request; }
--(void) setRequest:(NMAbstractRequest *)val { [val retain]; [request release]; request = val; }
-
--(NMAbstractResponse *) response { return response; }
--(void) setResponse:(NMAbstractResponse *)val { [val retain]; [response release]; response = val; }
-
--(NMAbstractView *) defaultLayout { return defaultLayout; }
--(void) setDefaultLayout:(NMAbstractView *)val { [val retain]; [defaultLayout release]; defaultLayout = val; }
-
--(NMAbstractView *) currentLayout { return currentLayout; }
--(void) setCurrentLayout:(NMAbstractView *)val { [val retain]; [currentLayout release]; currentLayout = val; }
-
--(NSData *) actionViewData { return actionViewData; }
--(void) setActionViewData:(NSData *)val { [val retain]; [actionViewData release]; actionViewData = val; }
-
+OBJC_ACC_ASSIGN(NMNewmApp *, application, application, setApplication)
+OBJC_ACC(NSMutableArray *, beforeFilters, beforeFilters, setBeforeFilters)
+OBJC_ACC(NMAbstractRequest *, request, request, setRequest)
+OBJC_ACC(NMAbstractResponse *, response, response, setResponse)
+OBJC_ACC(NMAbstractSession *, session, session, setSession)
+OBJC_ACC(NMAbstractView *, defaultLayout, defaultLayout, setDefaultLayout)
+OBJC_ACC(NMAbstractView *, currentLayout, currentLayout, setCurrentLayout)
+OBJC_ACC(NSData *, actionViewData, actionViewData, setActionViewData)
+OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 
 -(id) init {
 	self = [super init];
@@ -56,6 +44,12 @@
 		[inv invoke];
 		//FIXME - check status to see if I need to redirect or stop the call chain or something
 	}
+}
+
+-(void) prepareResponseForSendingContent {
+	// Serialize and sign session into cookiejar
+
+	// Serialize cookiejar into headers
 }
 
 -(void) runActionNamed:(NSString *)actionName {
@@ -93,6 +87,7 @@
 				[currentLayout reset];
 			}
 
+			[self prepareResponseForSendingContent];
 			[response writeContentData:finalData];
 		}
 	}

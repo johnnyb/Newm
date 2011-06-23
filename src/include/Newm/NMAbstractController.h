@@ -7,6 +7,8 @@
 #import <Newm/NMAbstractResponse.h>
 #import <Newm/NMAbstractView.h>
 #import <Newm/NMNewmApp.h>
+#import <Newm/NMAbstractSession.h>
+#import <Newm/NewmMacros.h>
 
 @class NMAbstractView;
 @class NMNewmApp;
@@ -17,6 +19,10 @@
 	NSMutableArray *beforeFilters;
 	NMAbstractRequest *request;
 	NMAbstractResponse *response;
+
+	NMAbstractSession *session;
+
+	NMCookieJar *cookieJar;	
 
 	NMAbstractView *defaultLayout;
 	NMAbstractView *currentLayout;
@@ -30,40 +36,33 @@
 -(void) runBeforeFilters;
 -(void) runActionNamed:(NSString *)actionName;
 -(NMAbstractView *) viewForActionName:(NSString *)name format:(NSString *)format;
+-(void) prepareResponseForSendingContent;
 
 // The application that put me here
--(NMNewmApp *) application;
--(void)setApplication:(NMNewmApp *)val;
-
+OBJC_ACC_DECL(NMNewmApp *, application, setApplication)
 
 // A list of NSInvocation objects to call
--(NSMutableArray *) beforeFilters;
--(void)setBeforeFilters:(NSMutableArray *)val;
-
+OBJC_ACC_DECL(NSMutableArray *, beforeFilters, setBeforeFilters)
 
 // This is the request used for calls
--(NMAbstractRequest *) request;
--(void)setRequest:(NMAbstractRequest *)val;
-
+OBJC_ACC_DECL(NMAbstractRequest *, request, setRequest)
 
 // This is the response object to write for output
--(NMAbstractResponse *) response;
--(void)setResponse:(NMAbstractResponse *)val;
-
+OBJC_ACC_DECL(NMAbstractResponse *, response, setResponse)
 
 // This is the default layout set at initialization time.  THIS SHOULD NOT BE MODIFIED AFTER CONTROLLER INITIALIZATION!
--(NMAbstractView *) defaultLayout;
--(void)setDefaultLayout:(NMAbstractView *)val;
-
+OBJC_ACC_DECL(NMAbstractView *, defaultLayout, setDefaultLayout)
 
 // This is the layout used for the current request
--(NMAbstractView *) currentLayout;
--(void)setCurrentLayout:(NMAbstractView *)val;
-
+OBJC_ACC_DECL(NMAbstractView *, currentLayout, setCurrentLayout)
 
 // This is the action's data for use in the layout
--(NSData *) actionViewData;
--(void)setActionViewData:(NSData *)val;
+OBJC_ACC_DECL(NSData *, actionViewData, setActionViewData)
 
+// This is the session object
+OBJC_ACC_DECL(NMAbstractSession *, session, setSession)
+
+// These are the outgoing cookies
+OBJC_ACC_DECL(NMCookieJar *, cookieJar, setCookieJar)
 
 @end

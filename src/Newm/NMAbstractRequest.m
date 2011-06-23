@@ -5,42 +5,18 @@
 
 @implementation NMAbstractRequest
 
--(NSString *) contentType { return contentType; }
--(void) setContentType:(NSString *)val { [val retain]; [contentType release]; contentType = val; }
-
--(NSString *) queryString { return queryString; }
--(void) setQueryString:(NSString *)val { [val retain]; [queryString release]; queryString = val; }
-
--(NSData *) postData { return postData; }
--(void) setPostData:(NSData *)val { [val retain]; [postData release]; postData = val; }
-
--(NSString *) httpReferer { return httpReferer; }
--(void) setHttpReferer:(NSString *)val { [val retain]; [httpReferer release]; httpReferer = val; }
-
--(NSString *) httpUserAgent { return httpUserAgent; }
--(void) setHttpUserAgent:(NSString *)val { [val retain]; [httpUserAgent release]; httpUserAgent = val; }
-
--(NSString *) pathInfo { return pathInfo; }
--(void) setPathInfo:(NSString *)val { [val retain]; [pathInfo release]; pathInfo = val; }
-
--(NSString *) remoteAddress { return remoteAddress; }
--(void) setRemoteAddress:(NSString *)val { [val retain]; [remoteAddress release]; remoteAddress = val; }
-
--(NSString *) requestMethod { return requestMethod; }
--(void) setRequestMethod:(NSString *)val { [val retain]; [requestMethod release]; requestMethod = val; }
-
--(NSString *) serverName { return serverName; }
--(void) setServerName:(NSString *)val { [val retain]; [serverName release]; serverName = val; }
-
--(NSMutableDictionary *) params { return params; }
--(void) setParams:(NSMutableDictionary *)val { [val retain]; [params release]; params = val; }
-
--(NMCookieJar *) cookieJar { return cookieJar; }
--(void) setCookieJar:(NMCookieJar *)val { [val retain]; [cookieJar release]; cookieJar = val; }
-
--(int) port { return port; }
--(void) setPort:(int)val { port = val; }
-
+OBJC_ACC(NSString *, contentType, contentType, setContentType)
+OBJC_ACC(NSString *, queryString, queryString, setQueryString)
+OBJC_ACC(NSData *, postData, postData, setPostData)
+OBJC_ACC(NSString *, httpReferer, httpReferer, setHttpReferer)
+OBJC_ACC(NSString *, httpUserAgent, httpUserAgent, setHttpUserAgent)
+OBJC_ACC(NSString *, pathInfo, pathInfo, setPathInfo)
+OBJC_ACC(NSString *, remoteAddress, remoteAddress, setRemoteAddress)
+OBJC_ACC(NSString *, requestMethod, requestMethod, setRequestMethod)
+OBJC_ACC(NSString *, serverName, serverName, setServerName)
+OBJC_ACC(NSMutableDictionary *, params, params, setParams)
+OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
+OBJC_ACC_ASSIGN(int, port, port, setPort)
 
 -(void) process {
 	//FIXME - this should raise an error

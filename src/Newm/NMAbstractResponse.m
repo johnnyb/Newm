@@ -6,8 +6,6 @@
 
 OBJC_ACC(NSMutableDictionary *, headers, headers, setHeaders)
 OBJC_ACC(NSMutableData *, content, content, setContent)
-OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
-OBJC_ACC(idSessionType, session, session, setSession)
 
 -(id) init {
 	self = [super init];
@@ -50,16 +48,6 @@ OBJC_ACC(idSessionType, session, session, setSession)
 -(void) setHeaderValue:(NSString *)val forField:(NSString *)fld {
 	[headers removeObjectForKey:fld];
 	[self addHeaderValue:val forField:fld];
-}
-
--(void) prepareSendHeaders {
-	// Serialize session as a cookie
-	if(session != nil) {
-	}
-
-	// Serialize cookies as headers
-	if(!IS_EMPTY(cookieJar)) {
-	}
 }
 
 -(void) sendHeaders {

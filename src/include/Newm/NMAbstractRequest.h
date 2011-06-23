@@ -1,6 +1,7 @@
 // Copyright 2011 Jonathan Bartlett
 
 #import <Foundation/Foundation.h>
+#import <Newm/NewmMacros.h>
 
 // FIXME - no file support yet!
 
@@ -23,40 +24,17 @@
 -(void) process;
 
 
--(NSString *) queryString;
--(void)setQueryString:(NSString *)val;
-
--(NSData *) postData;
--(void)setPostData:(NSData *)val;
-
--(NSString *) httpReferer;
--(void)setHttpReferer:(NSString *)val;
-
--(NSString *) httpUserAgent;
--(void)setHttpUserAgent:(NSString *)val;
-
--(NSString *) pathInfo;
--(void)setPathInfo:(NSString *)val;
-
--(NSString *) remoteAddress;
--(void)setRemoteAddress:(NSString *)val;
-
--(NSString *) requestMethod;
--(void)setRequestMethod:(NSString *)val;
-
--(NSString *) serverName;
--(void)setServerName:(NSString *)val;
-
--(NSString *) contentType;
--(void)setContentType:(NSString *)val;
-
--(NSMutableDictionary *) params;
--(void)setParams:(NSMutableDictionary *)val;
-
--(NMCookieJar *) cookieJar;
--(void)setCookieJar:(NMCookieJar *)val;
-
--(int) port;
--(void)setPort:(int)val;
+OBJC_ACC_DECL(NSString *, contentType, setContentType)
+OBJC_ACC_DECL(NSString *, queryString, setQueryString)
+OBJC_ACC_DECL(NSData *, postData, setPostData)
+OBJC_ACC_DECL(NSString *, httpReferer, setHttpReferer)
+OBJC_ACC_DECL(NSString *, httpUserAgent, setHttpUserAgent)
+OBJC_ACC_DECL(NSString *, pathInfo, setPathInfo)
+OBJC_ACC_DECL(NSString *, remoteAddress, setRemoteAddress)
+OBJC_ACC_DECL(NSString *, requestMethod, setRequestMethod)
+OBJC_ACC_DECL(NSString *, serverName, setServerName)
+OBJC_ACC_DECL(NSMutableDictionary *, params, setParams)
+OBJC_ACC_DECL(NMCookieJar *, cookieJar, setCookieJar)
+OBJC_ACC_DECL(int, port, setPort)
 
 @end
