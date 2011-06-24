@@ -33,6 +33,7 @@
 	[controller setApplication: self];
 	[controller setRequest: req];
 	[controller setResponse: resp];
+	[controller loadSession];
 
 	[controller runActionNamed:actionName];	
 

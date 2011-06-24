@@ -25,8 +25,25 @@ OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 	[self setBeforeFilters: [NSMutableArray arrayWithCapacity:10]];
 	[self setDefaultLayout: [NMAbstractView layoutForControllerName:[self className] format:@"html"]];
 	[self setCurrentLayout: defaultLayout];
+	[self setCookieJar: [[[NMCookieJar alloc] init] autorelease]];
 
 	return self;
+}
+
+-(void) loadSession {
+	NSString *serializedSessionBase64 = [[request cookieJar] cookieValueForKey: [application sessionCookieKey]];
+
+	// FIXME - check and remove signature first
+
+	NSData *serializedSession = [NSData dataFromBase64String:serializedSessionBase64];
+	[self setSession:[NSKeyedUnarchiver unarchiveObjectWithData:serializedSession]];
+	if(session == nil) {
+		[self setSession:[application buildSession]];
+	}
+	[session setLastAccessedDate:[NSDate date]];
+	// Touch the last-modified
+	// Set default cookiejar path
+	// set default cookiejar domain
 }
 
 -(void) reset {
@@ -34,6 +51,7 @@ OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 	[self setRequest: nil];
 	[self setResponse: nil];
 	[self setCurrentLayout: [self defaultLayout]];
+	[self setCookieJar: [[[NMCookieJar alloc] init] autorelease]];
 
 	/* Reset view-oriented data */
 	[self setActionViewData: nil];
