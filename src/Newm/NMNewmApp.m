@@ -7,8 +7,8 @@
 
 @implementation NMNewmApp
 
--(NMRouteMap *) routeMap { return routeMap; }
--(void) setRouteMap:(NMRouteMap *)val { [val retain]; [routeMap release]; routeMap = val; }
+OBJC_ACC(NMRouteMap *, routeMap, routeMap, setRouteMap)
+OBJC_ACC(NSString *, sessionSecret, sessionSecret, setSessionSecret)
 
 -(void) processRequest:(NMAbstractRequest *)req usingResponse:(NMAbstractResponse *)resp {
 	//use route map to map pathInfo into params, then use params to map to controllers and actions
@@ -47,6 +47,10 @@
 	[self setRouteMap: tmpmap];
 
 	return self;
+}
+
+-(NMAbstractSession *) buildSession {
+	return [[[NMAbstractSession alloc] init] autorelease];
 }
 
 -(NSString *)sessionCookieKey {

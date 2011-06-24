@@ -11,7 +11,7 @@ OBJC_ACC(NSMutableData *, content, content, setContent)
 	self = [super init];
 
 	[self setHeaders: [NSMutableDictionary dictionaryWithCapacity:10]];
-	[headers setObject:@"text/html" forKey:@"Content-Type"];
+	[self addHeaderValue:@"text/html" forField:@"Content-Type"];
 
 	[self setContent: [NSMutableData dataWithCapacity:200000]];
 

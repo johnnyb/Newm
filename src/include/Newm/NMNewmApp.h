@@ -6,16 +6,20 @@
 #import <Newm/NMAbstractResponse.h>
 
 @class NMRouteMap;
+@class NMAbstractSession;
 
 @interface NMNewmApp : NSObject {
+	NSString *sessionSecret;
 	NMRouteMap *routeMap;
 }
 
 -(void) processRequest:(NMAbstractRequest *)req usingResponse:(NMAbstractResponse *)resp;
 
--(NMRouteMap *) routeMap;
--(void)setRouteMap:(NMRouteMap *)val;
+OBJC_ACC_DECL(NMRouteMap *, routeMap, setRouteMap)
+OBJC_ACC_DECL(NSString *, sessionSecret, setSessionSecret)
+
 -(NSString *)sessionCookieKey;
 
+-(NMAbstractSession *) buildSession;
 
 @end

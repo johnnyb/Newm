@@ -36,6 +36,7 @@
 -(void) runBeforeFilters;
 -(void) runActionNamed:(NSString *)actionName;
 -(NMAbstractView *) viewForActionName:(NSString *)name format:(NSString *)format;
+-(void) loadSession;
 -(void) prepareResponseForSendingHeaders;
 
 // The application that put me here

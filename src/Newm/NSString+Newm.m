@@ -1,9 +1,11 @@
 // Copyright 2011 Jonathan Bartlett
 
-#import <Newm/NSString+Newm.h>
-#import <Newm/NSData+Newm.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
+
+#import <Newm/NSString+Newm.h>
+#import <Newm/NSData+Newm.h>
+#import <Newm/NewmMacros.h>
 
 @implementation NSString(Newm)
 
@@ -73,6 +75,10 @@
 // and http://api.rubyonrails.org/classes/ActiveSupport/MessageVerifier.html
 
 -(NSString *) validatableStringForSecret:(NSString *)secret {
+	if(IS_EMPTY(secret)) {
+		NSLog(@"Warning - no secret found for signing");
+		return self;
+	}
 	NSMutableData *dataForEncoding = [[self dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
 	const char *cKey = [secret cStringUsingEncoding:NSASCIIStringEncoding];
 	const char *cData = [dataForEncoding mutableBytes];
@@ -85,6 +91,10 @@
 }
 
 -(NSString *) validatedStringForSecret:(NSString *)secret {
+	if(IS_EMPTY(secret)) {
+		NSLog(@"Warning - no secret found for checking signature");
+		return self;
+	}
 	NSRange r = [self rangeOfString:@"--" options:NSBackwardsSearch];
 	if(r.length == 0) {
 		return nil; // Invalid coding;
@@ -97,6 +107,7 @@
 	if([signature isEqualToString:valid_signature]) {
 		return original;
 	} else {
+		NSLog(@"Warning - invalid signature");
 		return nil;
 	}
 }
