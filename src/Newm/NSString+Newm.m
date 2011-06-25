@@ -83,10 +83,10 @@
 	}
 	NSMutableData *dataForEncoding = [[self dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
 	const char *cKey = [secret cStringUsingEncoding:NSASCIIStringEncoding];
-	const char *cData = [dataForEncoding mutableBytes];
-	unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+	const unsigned char *cData = [dataForEncoding mutableBytes];
+	unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
 
-	CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, [dataForEncoding length], cHMAC);
+	CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, [dataForEncoding length], cHMAC);
 
 	NSString *signature = [dataForEncoding base64Encoding];
 	return [NSString stringWithFormat:@"%@--%@", self, signature];
@@ -103,7 +103,7 @@
 		return nil; // Invalid coding;
 	}
 
-	NSString *signature = [self substringFromIndex:(r.location + r.length)];
+	//NSString *signature = [self substringFromIndex:(r.location + r.length)];
 	NSString *original = [self substringToIndex:r.location]; 
 
 	NSString *valid_validated_string = [original validatableStringForSecret:secret];
