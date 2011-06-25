@@ -1,5 +1,6 @@
 #import <Newm/NSMutableArray+Newm.h>
 #import <Newm/NSString+Newm.h>
+#import <Newm/NewmMacros.h>
 
 @implementation NSMutableArray(Newm)
 
@@ -7,7 +8,7 @@
 -(void) trim {
 	if([self count] > 0) {
 		id first = [self objectAtIndex:0];
-		if([first isEmpty]) {
+		if(IS_EMPTY(first)) {
 			[self removeObjectAtIndex:0];
 		}
 	}
@@ -15,7 +16,7 @@
 	if([self count] > 0) {
 		int lastidx = [self count] - 1;
 		id last = [self objectAtIndex:lastidx];
-		if([last isEmpty]) {
+		if(IS_EMPTY(last)) {
 			[self removeObjectAtIndex:lastidx];
 		}
 	}
