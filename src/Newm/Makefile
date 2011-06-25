@@ -1,4 +1,9 @@
-LINUX_CFLAGS=-Wall -fconstant-string-class=NSConstantString -fobjc-exceptions -Wall -I ../include/ -I /usr/GNUstep/System/Library/Headers -D_NATIVE_OBJC_EXCEPTIONS
+
+## Exceptions ##
+#OBJC_EXC_FLAGS=-fobjc-exceptions -D_NATIVE_OBJC_EXCEPTIONS
+OBJC_EXC_FLAGS=
+
+LINUX_CFLAGS=-Wall -fconstant-string-class=NSConstantString -Wall -I ../include/ -I /usr/GNUstep/System/Library/Headers -I ../include/gnustepcompat
 OSX_CFLAGS=-Wall -I ../include 
 CFLAGS=$(LINUX_CFLAGS)
 
