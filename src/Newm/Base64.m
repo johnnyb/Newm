@@ -28,7 +28,7 @@ static char decodingTable[128];
 
 + (NSString*) encode:(const uint8_t*) input length:(NSInteger) length {
     NSMutableData* data = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
-    uint8_t* output = (uint8_t*)data.mutableBytes;
+    uint8_t* output = (uint8_t*)[data mutableBytes];
 
     NSInteger i;	
     for (i = 0; i < length; i += 3) {
@@ -55,7 +55,7 @@ static char decodingTable[128];
 
 
 + (NSString*) encode:(NSData*) rawBytes {
-    return [self encode:(const uint8_t*) rawBytes.bytes length:rawBytes.length];
+    return [self encode:(const uint8_t*) [rawBytes bytes] length:[rawBytes length]];
 }
 
 
@@ -70,7 +70,7 @@ static char decodingTable[128];
 	
 	NSInteger outputLength = inputLength * 3 / 4;
 	NSMutableData* data = [NSMutableData dataWithLength:outputLength];
-	uint8_t* output = data.mutableBytes;
+	uint8_t* output = [data mutableBytes];
 	
 	NSInteger inputPoint = 0;
 	NSInteger outputPoint = 0;
@@ -94,7 +94,7 @@ static char decodingTable[128];
 
 
 + (NSData*) decode:(NSString*) string {
-	return [self decode:[string cStringUsingEncoding:NSASCIIStringEncoding] length:string.length];
+	return [self decode:[string cStringUsingEncoding:NSASCIIStringEncoding] length:[string length]];
 }
 
 @end
