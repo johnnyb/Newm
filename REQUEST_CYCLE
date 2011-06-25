@@ -1,0 +1,24 @@
+Here is the basic cycle of the request:
+
+1) The entry point initializes
+    * The request - loads in all the parameters and cookies into the request hash.  Reads POST data if applicable.
+    * The response
+    * The app
+2) The entry point tells the app to process the request using the response with the message processRequest:usingResponse:
+3) The app tells the RouteMap to find the first route that matches the request.   It then tells the route to process the params based on the route.
+4) The app looks up the controller and action from the params (presumably set through the route).
+5) The app dynamically looks up the controller class, and prepares it - sets the request, response, app, and app, and tells it to load its session.
+	a) The request then performs the session load.  This reads the session from cookies, checks the signature, and deserializes the data.  It sets the "session" parameter, and then sets the last accessed time of the session
+6) The app then tells the controller to run the action with the given name
+	a) The controller runs the before filters
+	b) The controller looks a selector for the action name
+	c) the controller runs the selector if it exists
+	d) The controller checks to see if the response still needs output
+           * if so, the controller looks up the view by its name
+           * the controller runs the view and stores it in actionViewData
+           * the controller runs the layout and stores the output
+           * the controller prepares the response
+           * the controller tells the response to send the data (serializes session into outgoing cookie)
+7) The app then tells the response to send its headers and content ???? isn't this done already?
+
+FIXME - [self prepareResponseForSendingHeaders]; will not be called if the action sends out the content!!!
