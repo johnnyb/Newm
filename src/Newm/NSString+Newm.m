@@ -30,6 +30,8 @@
 		c = dataBytes[i];
 		if(c == '%') {
 			i++;
+			d = 0;
+			e = 0;
 			if(i < len) {
 				d = NIBBLE_HEX_VAL([self characterAtIndex:i]);
 				i++;
