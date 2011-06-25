@@ -7,6 +7,8 @@
 #import <Newm/NSData+Newm.h>
 #import <Newm/NewmMacros.h>
 
+#define NIBBLE_HEX_VAL(val) ((val) >= 'a' ? (((val) - 'a') + 10) : ((val) >= 'A' ? (((val) - 'A') + 10) : ((val) - '0')))
+
 @implementation NSString(Newm)
 
 //FIXME - these are dummies - need to be replaced with real stuff
@@ -29,11 +31,11 @@
 		if(c == '%') {
 			i++;
 			if(i < len) {
-				d = [self characterAtIndex:i];
+				d = NIBBLE_HEX_VAL([self characterAtIndex:i]);
 				i++;
 			}
 			if(i < len) {
-				e = [self characterAtIndex:i];
+				e = NIBBLE_HEX_VAL([self characterAtIndex:i]);
 				i++;
 			}
 			
@@ -97,14 +99,15 @@
 	}
 	NSRange r = [self rangeOfString:@"--" options:NSBackwardsSearch];
 	if(r.length == 0) {
+		NSLog(@"Didn't find separator");
 		return nil; // Invalid coding;
 	}
 
 	NSString *signature = [self substringFromIndex:(r.location + r.length)];
 	NSString *original = [self substringToIndex:r.location]; 
 
-	NSString *valid_signature = [original validatableStringForSecret:secret];
-	if([signature isEqualToString:valid_signature]) {
+	NSString *valid_validated_string = [original validatableStringForSecret:secret];
+	if([valid_validated_string isEqualToString:self]) {
 		return original;
 	} else {
 		NSLog(@"Warning - invalid signature");

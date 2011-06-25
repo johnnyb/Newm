@@ -2,9 +2,17 @@
 
 @implementation MySession
 
+-(id) init {
+	self = [super init];
+	userId = 23;
+	return self;
+}
+
 -(id) initWithCoder:(NSCoder *)decoder {
+	//NSLog(@"Initializing class!");
 	if((self = [super initWithCoder:decoder])) {
 		[self setUserId: [decoder decodeIntForKey:@"userId"]];
+		//NSLog(@"Setting user id: %d", userId);
 	}
 	return self;
 }

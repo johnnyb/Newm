@@ -33,12 +33,17 @@ OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 -(void) loadSession {
 	NSString *signedSerializedSessionBase64 = [[request cookieJar] cookieValueForKey: [application sessionCookieKey]];
 	NSString *serializedSessionBase64 = [signedSerializedSessionBase64 validatedStringForSecret:[application sessionSecret]];
+	//NSString *serializedSessionBase64 = signedSerializedSessionBase64;
+
+	//NSLog(@"Serialized Session: %@", serializedSessionBase64);
 
 	if(serializedSessionBase64 == nil) {
 		[self setSession:nil];
 	} else {
 		NSData *serializedSession = [NSData dataFromBase64String:serializedSessionBase64];
+		//NSLog(@"Data serialized session: %@", serializedSession);
 		[self setSession:[NSKeyedUnarchiver unarchiveObjectWithData:serializedSession]];
+		//NSLog(@"Realized session: %@", session);
 	}
 
 	if(session == nil) {
@@ -74,7 +79,10 @@ OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 -(void) prepareResponseForSendingHeaders {
 	// Serialize and sign session into cookiejar
 	NSData *output = [NSKeyedArchiver archivedDataWithRootObject:session];
-	[cookieJar setCookieValue:[[output base64Encoding] validatableStringForSecret:[application sessionSecret]] forKey:[application sessionCookieKey]];
+	NSString *serializedOutput = [output base64Encoding];
+	NSString *signedSerializedOutput = [serializedOutput validatableStringForSecret:[application sessionSecret]];
+	//NSString *signedSerializedOutput = serializedOutput;
+	[cookieJar setCookieValue:signedSerializedOutput forKey:[application sessionCookieKey]];
 
 	// Serialize cookiejar into headers
 	NMCookie *cookie;

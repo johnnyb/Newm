@@ -23,8 +23,8 @@ OBJC_ACC(NSString *, sessionSecret, sessionSecret, setSessionSecret)
 
 	//FIXME - should I cache the controllers as I make them?
 	//NOTE - if I do cache the controllers, I need to run reset
-	fprintf(stderr, "Controller: %s\n", [controllerName cStringUsingEncoding:NSUTF8StringEncoding]);
-	fprintf(stderr, "Action: %s\n", [actionName cStringUsingEncoding:NSUTF8StringEncoding]);
+	//NSLog(@"Controller: %@", controllerName);
+	//NSLog(@"Action: %@", actionName);
 	
 	Class controller_class = objc_getClass([controllerName cStringUsingEncoding:NSUTF8StringEncoding]);
 	NMAbstractController *controller = [[[controller_class alloc] init] autorelease];

@@ -23,12 +23,15 @@
 	NSArray *ary = [cookieString componentsSeparatedByString:@";"];
 	NSEnumerator *e = [ary objectEnumerator];
 	NSString *cookieline;
+	//NSLog(@"Loading %d cookies", [ary count]);
 	while((cookieline = [e nextObject])) {
 		cookieline = [cookieline stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 		if(!IS_EMPTY(cookieline)) {
 			NSArray *keyval = [cookieline componentsSeparatedByString:@"="];
+			//NSLog(@"Keyval: %@    Keyvalparsed: %@", cookieline, keyval);
 			NSString *key = [[keyval objectAtIndex:0] URLDecode];
 			NSString *val = [[keyval objectAtIndex:1] URLDecode];
+			//NSLog(@"Setting cookie: %@ with val: %@", key, val);
 			[self setCookieValue:val forKey:key];
 		}
 	}

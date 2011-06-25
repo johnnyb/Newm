@@ -1,8 +1,14 @@
 #import <Newm/NSData+Newm.h>
+#import <Newm/Base64.h>
 
 #define NIBBLE_HEX_CHAR(val) (((val) >= 10) ? 'a' + ((val) - 10) : '0' + (val))
 
 @implementation NSData(Newm)
+
++(NSData *) dataFromBase64String:(NSString *)str {
+	return [Base64 decode:str];
+}
+
 -(NSString *)stringValue {
 	return [[[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding] autorelease];
 }
@@ -39,7 +45,9 @@
 }
 
 -(NSString *) base64Encoding {
-	return [[[[self description] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""];
+	return [Base64 encode:self];
 }
+
+
 
 @end
