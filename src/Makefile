@@ -7,7 +7,7 @@ OBJC_EXC_FLAGS=
 #OBJC_EXC_FLAGS=-fobjc-exceptions -D_NATIVE_OBJC_EXCEPTIONS
 
 LINUX_CFLAGS=-fconstant-string-class=NSConstantString $(OBJC_EXC_FLAGS) -Wall -L build -L /usr/GNUstep/System/Library/Libraries/ -I . -I include -I /usr/GNUstep/System/Library/Headers
-LINUX_LINKFLAGS=-lobjc -lgnustep-base -Wl,-whole-archive -lnewm -Wl,-no-whole-archive 
+LINUX_LINKFLAGS=-lobjc -lgnustep-base -Wl,-whole-archive -lnewm -Wl,-no-whole-archive  -lssl
 
 OSX_CFLAGS=-Wall -I. -I include -L build -framework Foundation 
 OSX_LINKFLAGS=-lnewm -ObjC -framework Foundation

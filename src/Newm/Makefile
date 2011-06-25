@@ -3,7 +3,7 @@
 #OBJC_EXC_FLAGS=-fobjc-exceptions -D_NATIVE_OBJC_EXCEPTIONS
 OBJC_EXC_FLAGS=
 
-LINUX_CFLAGS=-Wall -fconstant-string-class=NSConstantString -Wall -I ../include/ -I /usr/GNUstep/System/Library/Headers -I ../include/gnustepcompat
+LINUX_CFLAGS=-Wall -fconstant-string-class=NSConstantString -Wall -I ../include/ -I /usr/GNUstep/System/Library/Headers  -I ../include/gnustepcompat
 OSX_CFLAGS=-Wall -I ../include 
 CFLAGS=$(LINUX_CFLAGS)
 
@@ -25,4 +25,4 @@ dynamic: objectfiles
 	libtool -dynamic *.o -framework Foundation -lc -o ../build/libnewm.so
 
 clean:
-	rm -f *.o
+	rm -f *.o *.d
