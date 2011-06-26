@@ -17,8 +17,17 @@ Here is the basic cycle of the request:
            * if so, the controller looks up the view by its name
            * the controller runs the view and stores it in actionViewData
            * the controller runs the layout and stores the output
-           * the controller prepares the response
-           * the controller tells the response to send the data (serializes session into outgoing cookie)
-7) The app then tells the response to send its headers and content ???? isn't this done already?
+           * the controller writes the data to the response, which holds it in a buffer
+        e) the controller prepares the response
+           * serializes the session into an outgoing cookie
+           * serializes the cookies into the response headers
+7) The app then tells the response to *send* its headers and content 
 
-FIXME - [self prepareResponseForSendingHeaders]; will not be called if the action sends out the content!!!
+
+Responsibilities:
+
+1) Request - marshals the CGI data into a decent format
+
+2) Application - manages routing and sessions
+
+2) Controller - manages interface between request, response, and view, including session management

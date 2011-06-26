@@ -122,19 +122,17 @@ OBJC_ACC(NMCookieJar *, cookieJar, cookieJar, setCookieJar)
 			//FIXME - raise error
 		} else {
 			[self setActionViewData: [v render:self]];
-			[v reset];
 
 			if(currentLayout == nil) {
 				finalData = actionViewData;
 			} else {
 				finalData = [currentLayout render:self];
-				[currentLayout reset];
 			}
 
-			[self prepareResponseForSendingHeaders];
 			[response writeContentData:finalData];
 		}
 	}
+	[self prepareResponseForSendingHeaders];
 }
 
 -(NMAbstractView *) viewForActionName:(NSString *)name format:(NSString *)fmt {
